@@ -18,31 +18,31 @@ export default function Category() {
     {
       id: '2',
       name: 'Computers',
-      path: '/exclusive/',
+      path: '/Exclusive-React/',
       icon: <FontAwesomeIcon icon={faDesktop}/>,
     },
     {
       id: '3',
       name: 'SmartWatch',
-      path: '/exclusive/',
+      path: '/Exclusive-React/',
       icon: <MdWatch />,
     },
     {
       id: '4',
       name: 'Camera',
-      path: '/exclusive/',
+      path: '/Exclusive-React/',
       icon: <FontAwesomeIcon icon={faCamera} />,
     },
     {
       id: '5',
       name: 'Headphones',
-      path: '/exclusive/',
+      path: '/Exclusive-React/',
       icon: <FontAwesomeIcon icon={faHeadphones} />,
     },
     {
       id: '6',
       name: 'Gaming',
-      path: '/exclusive/',
+      path: '/Exclusive-React/',
       icon: <FontAwesomeIcon icon={faGamepad} />
     },
     {

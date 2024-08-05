@@ -16,7 +16,7 @@ register();
 
 const router = createBrowserRouter([
   {
-    path: "/exclusive/",
+    path: "/Exclusive-React/",
     element: <App />,
     children: [
       {
