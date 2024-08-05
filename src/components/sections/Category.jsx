@@ -12,43 +12,43 @@ export default function Category() {
     {
       id: '1',
       name: 'Phones',
-      path: '/',
+      path: 'about',
       icon: <FontAwesomeIcon icon={faMobileScreenButton}/>,
     },
     {
       id: '2',
       name: 'Computers',
-      path: '/',
+      path: '/exclusive/',
       icon: <FontAwesomeIcon icon={faDesktop}/>,
     },
     {
       id: '3',
       name: 'SmartWatch',
-      path: '/',
+      path: '/exclusive/',
       icon: <MdWatch />,
     },
     {
       id: '4',
       name: 'Camera',
-      path: '/',
+      path: '/exclusive/',
       icon: <FontAwesomeIcon icon={faCamera} />,
     },
     {
       id: '5',
       name: 'Headphones',
-      path: '/',
+      path: '/exclusive/',
       icon: <FontAwesomeIcon icon={faHeadphones} />,
     },
     {
       id: '6',
       name: 'Gaming',
-      path: '/',
+      path: '/exclusive/',
       icon: <FontAwesomeIcon icon={faGamepad} />
     },
     {
       id: '7',
       name: 'Gaming',
-      path: '/',
+      path: '',
       icon: <FontAwesomeIcon icon={faGamepad} />
     }
   ];  

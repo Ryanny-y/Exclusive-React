@@ -16,27 +16,27 @@ register();
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/exclusive/",
     element: <App />,
     children: [
       {
-        path: '/',
+        path: '',
         element: <Home />
       },
       {
-        path: '/contact',
+        path: 'contact',
         element: <Contact />
       },
       {
-        path: '/about',
+        path: 'about',
         element: <About />
       },
       {
-        path: '/signup',
+        path: 'signup',
         element: <SignUp />
       },
       {
-        path: "/*",
+        path: "*",
         element: <NotFound />
       }
     ]
