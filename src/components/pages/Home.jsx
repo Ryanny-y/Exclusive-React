@@ -3,6 +3,7 @@ import FlashSales from "../sections/FlashSales";
 import Category from "../sections/Category";
 import BestSelling from "../sections/BestSelling";
 import ExploreProduct from "../sections/ExploreProduct";
+import Services from "../sections/Services";
 
 export default function Home() {
   
@@ -14,6 +15,7 @@ export default function Home() {
       <Category />
       <BestSelling />
       <ExploreProduct />
+      <Services />
     </main>
   )
 }

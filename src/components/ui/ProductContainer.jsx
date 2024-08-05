@@ -12,19 +12,22 @@ export default function ProductContainer({productDetails}) {
   return (
     <div className="product-container flex flex-col gap-4 rounded-sm">
       <div className="product-image p-10 bg-secondaryLight rounded-sm flex justify-center relative overflow-hidden"
-      onMouseEnter={() => setHovered(c => !c)} onMouseLeave={() => setHovered(c => !c)}
-      >
+      onMouseEnter={() => setHovered(c => !c)} onMouseLeave={() => setHovered(c => !c)}>
         <WishlistBtn />
         <ViewProductBtn />
         {!productDetails.discountPercent || productDetails.discountPercent > 0 && 
           <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">-{productDetails.discountPercent * 100}%</p>
         }
 
-        <img src={productDetails.image} alt="product image" style={{
-        width: '100%',
-        maxWidth: '172px',
-        height: '152px'
-        }}/>
+        <img 
+          src={productDetails.image} 
+          alt="product image" 
+          style={{
+            width: '100%',
+            maxWidth: '172px',
+            height: '152px'
+          }}
+        />
 
         <AddToCartBtn hovered={hovered}/>
       </div>

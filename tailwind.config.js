@@ -16,6 +16,7 @@ export default {
         light: "#FFFFFF",
         dark: "#000000",
         primaryRed: "#DB4444",
+        primaryGray: "#c1c0c1",
         secondaryRed: "#E07575",
         secondaryGray: "#7D8184",
         secondaryLight: "#F5F5F5",
@@ -30,6 +31,12 @@ export default {
       },
       screens: {
         'xs': "560px"
+      },
+      height: {
+        '18': "70px"
+      },
+      width: {
+        '18': "70px"
       }
     },
   },

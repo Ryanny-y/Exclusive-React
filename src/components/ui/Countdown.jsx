@@ -35,22 +35,31 @@ export default function Countdown() {
   return (
     <div className="countdown flex items-start gap-9 font-bold ml-0 md:ml-20 flex-grow">
       {Object.entries(time).map(([unit, value]) => (
-        <div key={unit} className={`${unit} 
-          relative 
-          text-4xl 
-          before:content-['${(unit).replace(unit.charAt(0), unit.charAt(0).toUpperCase())}'] 
-          before:text-xs
-          before:font-medium 
-          before:absolute 
-          before:-top-4
-          ${unit !== 'seconds' && "after:content-[':']"}
-          after:text-primaryRed
-          after:font-medium
-          after:absolute
-          after:-top-1
-          after:-right-6`
-        }>
-          {String(value).padStart(2, '0')}
+        <div
+          key={unit}
+          className={`${unit} 
+            relative 
+            text-4xl
+            before:text-xs
+            before:font-medium 
+            before:absolute 
+            before:-top-4
+            ${unit !== 'seconds' ? 'after:content-[":"]' : ''} 
+            after:text-primaryRed
+            after:font-medium 
+            after:absolute 
+            after:-top-1 
+            after:-right-6`}
+          style={{
+            '--before-content': `"${unit.charAt(0).toUpperCase() + unit.slice(1)}"`,
+          }}
+        >
+          <style jsx>{`
+            .${unit}::before {
+              content: var(--before-content);
+            }
+          `}</style>
+            {String(value).padStart(2, '0')}
         </div>
       ))}
     </div>
