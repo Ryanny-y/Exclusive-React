@@ -1,0 +1,14 @@
+/* HERO SLIDERS */
+.hero .swiper-pagination-bullet {
+  background-color: #DB4444 !important;
+}
+
+.hero .swiper-pagination-bullet-active {
+  background-color: #DB4444 !important;
+}
+
+/* hover effect */
+.h-text-red:hover {
+  color: #DB4444;
+  transition-duration: 200ms;
+}
