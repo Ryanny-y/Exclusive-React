@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SectionContainer from "../layouts/SectionContainer";
 import SectionHeader from "../ui/SectionHeader";
 import SectionSlider from "../ui/sliders/SectionSlider";
 import ProductContainer from "../ui/ProductContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import Countdown from "../ui/Countdown";
 
 
 export default function FlashSales() {
@@ -104,7 +105,9 @@ export default function FlashSales() {
   return (
       <SectionContainer classname="flash-sales">
         <SectionHeader sectionTitle="Today's" sectionHeader='Flash Sales'>
-          <div className="flex items-center gap-2 self-end">
+          <Countdown />
+
+          <div className="flex items-center gap-2 self-end grow justify-end">
             {prevBtn}
             {nextBtn}
           </div>
