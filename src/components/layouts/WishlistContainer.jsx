@@ -1,10 +1,10 @@
-import SectionContainer from "../layouts/SectionContainer";
-import SectionHeader from "../ui/SectionHeader";
-import SectionSlider from "../ui/sliders/SectionSlider";
+import SectionSlider from '../ui/sliders/SectionSlider';
 import ProductContainer from '../ui/ProductContainer';
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function ExploreProduct() {
+export default function WishlistContainer({header}) {
+  
+  const isWishlist = header === 'Wishlist';
 
   const [ productDetails, setProductDetails ] = useState([
     {
@@ -117,78 +117,41 @@ export default function ExploreProduct() {
         count: 88
       },
     },
-    {
-      id: '11',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 160,
-      discountPercent: .40,
-      ratings: {
-        stars: 5,
-        count: 88
-      },
-    },
-    {
-      id: '12',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 19099,
-      discountPercent: .40,
-      ratings: {
-        stars: 4.5,
-        count: 88
-      },
-    },
   ]);
 
   const breakpoints= {
-    0: {
-      grid: {
-        rows: 2,
-        fill: 'row'
-      },
-      slidesPerView: 1,
-      spaceBetween: 30
-      },
-    768: {
-      grid: {
-        rows: 2,
-        fill: 'row'
-      },
-      slidesPerView: 4,
-      spaceBetween: 30
+    480: {
+        slidesPerView: 2,
+        spaceBetween: 30,
     },
-    640: {
-      grid: {
-        rows: 2,
-        fill: 'row'
-      },
-      slidesPerView: 3,
-      spaceBetween: 15
+    864: {
+        slidesPerView: 3,
+        spaceBetween: 30,
     },
-    406: {
-      grid: {
-        rows: 2,
-        fill: 'row'
-      },
-      slidesPerView: 2,
-      spaceBetween: 10
-    }, 
+    1024: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+    }
   }
-  
+
   return (
-    <SectionContainer classname="our-products">
-      <SectionHeader sectionTitle='Our Products' sectionHeader="Explore Our Products">
-        {/* Insert navigation */}
-      </SectionHeader>
+    <section className="wishlist flex flex-col gap-16">
+      <div className="flex items-center justify-between flex-wrap text-nomwrap">
+        <h1 className="text-xl font-semibold relative flex items-center gap-4">
+          {!isWishlist && <div className='h-10 w-5 bg-primaryRed rounded-md'></div>}
+          {header} ({productDetails.length})
+        </h1>
+
+        <button className="py-2 px-8 justify-self-end self-end md:py-4 md:px-12 font-medium border-2 border-secondaryGray rounded-md">{isWishlist ? 'Move All To Bag' : 'See All'}</button>
+      </div>
 
       <SectionSlider breakpoints={breakpoints}>
         {productDetails.map(product => (
-          <swiper-slide key={product.id} >
+          <swiper-slide key={product.id}>
             <ProductContainer productDetails={product}/>
           </swiper-slide>
         ))}
       </SectionSlider>
-    </SectionContainer>
+    </section>
   )
 }

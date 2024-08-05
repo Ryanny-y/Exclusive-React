@@ -3,6 +3,7 @@ import { ProductContext } from "../../context/ProductContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import { Link } from 'react-router-dom' 
 
 export default function SearchBar() {
   const { searchProduct, setSearchProduct } = useContext(ProductContext);
@@ -20,8 +21,8 @@ export default function SearchBar() {
         <FontAwesomeIcon className="absolute top-1/2 -translate-y-1/2 right-3" icon={faMagnifyingGlass} />
       </div>
 
-      <FontAwesomeIcon icon={faHeart} className="text-xl"/>
-      <FontAwesomeIcon icon={faCartShopping} className="text-xl"/>
+      <Link to='wishlist'><FontAwesomeIcon icon={faHeart} className="text-xl h-text-red"/></Link>
+      <Link to='cart'><FontAwesomeIcon icon={faCartShopping} className="text-xl h-text-red"/></Link>
     </div>
   )
 }

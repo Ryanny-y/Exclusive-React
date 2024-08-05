@@ -49,10 +49,10 @@ export default function Footer() {
         <div id="download" className="flex flex-col gap-4 basis-52 grow-0">
           <h1 className="font-medium">Download App</h1>
           <p className="text-secondaryGray text-xs font-semibold">Save $3 with App New user Only</p>
-          <div class="grid grid-cols-[100px_100px] grid-rows-[repeat(2,_45px)] gap-1">
-            <img src="images/logo/Qrcode 1.png" class="col-span-1 row-span-2 w-full h-full" alt="Qr Code" />
-            <img src="images/logo/GooglePlay.png" class="col-start-2 row-start-1 w-60 h-full" alt="Google Play" />
-            <img src="images/logo/AppStore.png" class="col-start-2 row-start-2 w-60 h-full" alt="App Store" />
+          <div className="grid grid-cols-[100px_100px] grid-rows-[repeat(2,_45px)] gap-1">
+            <img src="images/logo/Qrcode 1.png" className="col-span-1 row-span-2 w-full h-full" alt="Qr Code" />
+            <img src="images/logo/GooglePlay.png" className="col-start-2 row-start-1 w-60 h-full" alt="Google Play" />
+            <img src="images/logo/AppStore.png" className="col-start-2 row-start-2 w-60 h-full" alt="App Store" />
           </div>
           <div className="socials flex gap-6">
             <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faFacebookF} /></Link>
