@@ -12,3 +12,25 @@
   color: #DB4444;
   transition-duration: 200ms;
 }
+
+.h-bg-red:hover {
+  color: #ffffff;
+  background: #E07575;
+  transition-duration: 200ms;
+}
+
+/* small header */
+.small-header > *:not(:last-of-type)::after {
+  content: '/';
+  position: absolute;
+  right: -20px;
+  top: 0;
+}
+
+.small-header > * {
+  position: relative;
+}
+
+.small-header > *:last-of-type {
+  color: black;
+}

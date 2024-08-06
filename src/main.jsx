@@ -4,9 +4,10 @@ import App from './App.jsx'
 import Home from './components/pages/Home.jsx'
 import Contact from './components/pages/Contact.jsx'
 import About from './components/pages/About.jsx'
-import SignUp from './components/pages/SignUp.jsx'
+import SignUp from './components/auth/Signup.jsx'
 import NotFound from './components/pages/NotFound.jsx'
 import Wishlist from './components/pages/Wishlist.jsx'
+import Login from './components/auth/Login.jsx'
 import './index.css'
 import './styles/sliderStyles.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: 'wishlist',
         element: <Wishlist />
+      },
+      {
+        path: 'login',
+        element: <Login />
       },
       {
         path: "*",

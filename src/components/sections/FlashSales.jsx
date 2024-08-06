@@ -121,7 +121,7 @@ export default function FlashSales() {
           ))}
         </SectionSlider>
 
-        <button className="bg-primaryRed text-light py-4 px-12 self-center rounded-sm hover:bg-secondaryRed">View All Product</button>
+        <button className="bg-primaryRed text-light py-4 px-12 self-center rounded-sm h-bg-red">View All Product</button>
       </SectionContainer>
   )
 
