@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Signup() {
 
   return (
-    <main className="signup relative my-16">
+    <main className="signup relative my-16" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex justify-center sm:justify-end items-center" style={{height: '781px'}}>
         <section id="form" className="w-96 flex flex-col gap-4 bg-white rounded-md px-5 py-24">
           <form

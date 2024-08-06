@@ -34,3 +34,13 @@
 .small-header > *:last-of-type {
   color: black;
 }
+
+/* HOVER AFTER */
+.h-bg-white-a:hover > span {
+  background: white;
+  transition: 200ms;
+  color: black;
+}
+.h-bg-white-a:hover > span::after {
+  opacity: 50%;
+}
