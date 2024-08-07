@@ -6,6 +6,7 @@ import Contact from './components/pages/Contact.jsx'
 import About from './components/pages/About.jsx'
 import SignUp from './components/auth/Signup.jsx'
 import NotFound from './components/pages/NotFound.jsx'
+import Cart from './components/pages/Cart.jsx'
 import Wishlist from './components/pages/Wishlist.jsx'
 import Login from './components/auth/Login.jsx'
 import './index.css'
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignUp />
+      },
+      {
+        path: 'cart',
+        element: <Cart />
       },
       {
         path: 'wishlist',

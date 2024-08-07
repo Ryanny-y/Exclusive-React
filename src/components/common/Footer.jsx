@@ -31,19 +31,19 @@ export default function Footer() {
 
         <div id="account" className="flex flex-col gap-4 shrink-0 grow md:grow-0">
           <h1 className="font-medium">My Account</h1>
-          <Link to='/' className="h-text-red">Account</Link>
-          <Link to='/' className="h-text-red">Login / Register</Link>
-          <Link to='/' className="h-text-red">Cart</Link>
-          <Link to='/' className="h-text-red">Wishlist</Link>
-          <Link to='/' className="h-text-red">Shop</Link>
+          <a href='/Exclusive-React/' className="h-text-red">Account</a>
+          <a href='login' className="h-text-red">Login / Register</a>
+          <a href='cart' className="h-text-red">Cart</a>
+          <a href='wishlist' className="h-text-red">Wishlist</a>
+          <a href='/Exclusive-React/' className="h-text-red">Shop</a>
         </div>
 
         <div id="quick-link" className="flex flex-col gap-4 md:basis-40 grow md:grow-0">
           <h1 className="font-medium">Quick Link</h1>
-          <Link to='/' className="h-text-red">Privacy Policy</Link>
-          <Link to='/' className="h-text-red">Term Of Use</Link>
-          <Link to='/' className="h-text-red">FAQ</Link>
-          <Link to='/' className="h-text-red">Contact</Link>
+          <a href='/Exclusive-React/' className="h-text-red">Privacy Policy</a>
+          <a href='/Exclusive-React/' className="h-text-red">Term Of Use</a>
+          <a href='/Exclusive-React/' className="h-text-red">FAQ</a>
+          <a href='contact' className="h-text-red">Contact</a>
         </div>
 
         <div id="download" className="flex flex-col gap-4 basis-52 grow-0">
@@ -55,10 +55,10 @@ export default function Footer() {
             <img src="images/logo/AppStore.png" className="col-start-2 row-start-2 w-60 h-full" alt="App Store" />
           </div>
           <div className="socials flex gap-6">
-            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faFacebookF} /></Link>
-            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faTwitter} /></Link>
-            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faInstagram} /></Link>
-            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faLinkedin} /></Link>
+            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faFacebookF} /></Link>
+            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faTwitter} /></Link>
+            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faInstagram} /></Link>
+            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faLinkedin} /></Link>
           </div>
         </div>
       </div>
