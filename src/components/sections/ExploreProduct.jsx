@@ -9,7 +9,7 @@ export default function ExploreProduct() {
   const [ productDetails, setProductDetails ] = useState([
     {
       id: '1',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 160,
       discountPercent: .6,
@@ -20,7 +20,7 @@ export default function ExploreProduct() {
     },
     {
       id: '2',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 19099,
       discountPercent: .40,
@@ -31,7 +31,7 @@ export default function ExploreProduct() {
     },
     {
       id: '3',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 160,
       discountPercent: .40,
@@ -42,7 +42,7 @@ export default function ExploreProduct() {
     },
     {
       id: '4',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 19099,
       discountPercent: .40,
@@ -53,7 +53,7 @@ export default function ExploreProduct() {
     },
     {
       id: '5',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 160,
       discountPercent: .40,
@@ -64,7 +64,7 @@ export default function ExploreProduct() {
     },
     {
       id: '6',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 19099,
       discountPercent: .40,
@@ -75,7 +75,7 @@ export default function ExploreProduct() {
     },
     {
       id: '7',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 160,
       discountPercent: .6,
@@ -86,7 +86,7 @@ export default function ExploreProduct() {
     },
     {
       id: '8',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 19099,
       discountPercent: .40,
@@ -97,7 +97,7 @@ export default function ExploreProduct() {
     },
     {
       id: '9',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 160,
       discountPercent: .40,
@@ -108,7 +108,7 @@ export default function ExploreProduct() {
     },
     {
       id: '10',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 19099,
       discountPercent: .40,
@@ -119,7 +119,7 @@ export default function ExploreProduct() {
     },
     {
       id: '11',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 160,
       discountPercent: .40,
@@ -130,7 +130,7 @@ export default function ExploreProduct() {
     },
     {
       id: '12',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
+      images: ['HAVIT Hv-G92 Gamepad.png'],
       name: 'HAVIT HV-G92 Gamepad',
       originalPrice: 19099,
       discountPercent: .40,

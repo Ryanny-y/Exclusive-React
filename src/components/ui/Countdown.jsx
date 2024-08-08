@@ -54,7 +54,7 @@ export default function Countdown() {
             '--before-content': `"${unit.charAt(0).toUpperCase() + unit.slice(1)}"`,
           }}
         >
-          <style jsx>{`
+          <style >{`
             .${unit}::before {
               content: var(--before-content);
             }

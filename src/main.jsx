@@ -9,6 +9,7 @@ import NotFound from './components/pages/NotFound.jsx'
 import Cart from './components/pages/Cart.jsx'
 import Wishlist from './components/pages/Wishlist.jsx'
 import Login from './components/auth/Login.jsx'
+import Checkout from './components/pages/Checkout.jsx'
 import './index.css'
 import './styles/sliderStyles.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         element: <Cart />
       },
       {
+        path: 'checkout',
+        element: <Checkout />
+      },
+      {
         path: 'wishlist',
         element: <Wishlist />
       },
@@ -59,7 +64,7 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

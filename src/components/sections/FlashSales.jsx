@@ -6,79 +6,22 @@ import ProductContainer from "../ui/ProductContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Countdown from "../ui/Countdown";
+import useFetchData from "../../utils/hooks/useFetchData";
 
 
 export default function FlashSales() {
-  
-  const [ productDetails, setProductDetails ] = useState([
-    {
-      id: '1',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 160,
-      discountPercent: .6,
-      ratings: {
-        stars: 5,
-        count: 88
-      },
-    },
-    {
-      id: '2',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 19099,
-      discountPercent: .40,
-      ratings: {
-        stars: 4.5,
-        count: 88
-      },
-    },
-    {
-      id: '3',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 160,
-      discountPercent: .40,
-      ratings: {
-        stars: 5,
-        count: 88
-      },
-    },
-    {
-      id: '4',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 19099,
-      discountPercent: .40,
-      ratings: {
-        stars: 4.5,
-        count: 88
-      },
-    },
-    {
-      id: '5',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 160,
-      discountPercent: .40,
-      ratings: {
-        stars: 5,
-        count: 88
-      },
-    },
-    {
-      id: '6',
-      image: 'images/product-image/HAVIT Hv-G92 Gamepad.png',
-      name: 'HAVIT HV-G92 Gamepad',
-      originalPrice: 19099,
-      discountPercent: .40,
-      ratings: {
-        stars: 4.5,
-        count: 88
-      },
-    },
-  ]);
+  const [ productDetails, setProductDetails ] = useState([]);
 
+  const url = 'http://localhost:3500/flashsales'
+
+  const { data, error, isLoading } = useFetchData(url);
+
+  useEffect(() => {
+    if (!error && !isLoading && data.length) {
+      setProductDetails(data);
+    }
+  }, [data, error, isLoading]);
+  
   const breakpoints= {
       480: {
           slidesPerView: 2,
@@ -115,7 +58,8 @@ export default function FlashSales() {
           
         <SectionSlider breakpoints={breakpoints} prevBtn=".flash-sales.prev-btn" nextBtn=".flash-sales.next-btn">
           {productDetails.map(product => (
-            <swiper-slide key={product.id} >
+            <swiper-slide key={product._id} >
+              {console.log(product.images[0])}
               <ProductContainer productDetails={product}/>
             </swiper-slide>
           ))}

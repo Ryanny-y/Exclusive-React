@@ -15,12 +15,13 @@ export default function ProductContainer({productDetails}) {
       onMouseEnter={() => setHovered(c => !c)} onMouseLeave={() => setHovered(c => !c)}>
         <WishlistBtn />
         <ViewProductBtn />
-        {!productDetails.discountPercent || productDetails.discountPercent > 0 && 
-          <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">-{productDetails.discountPercent * 100}%</p>
+        {!productDetails.discount || productDetails.discount > 0 && 
+          <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">-{productDetails.discount * 100}%</p>
         }
+        
 
         <img 
-          src={productDetails.image} 
+          src={`http://localhost:3500/image/${productDetails.images[0]}`} 
           alt="product image" 
           style={{
             width: '100%',
@@ -35,8 +36,8 @@ export default function ProductContainer({productDetails}) {
         <h1>{productDetails.name}</h1>
 
         <span className="product-prices flex items-center gap-3">
-          <p className="discounted-price text-primaryRed">${getDiscountedPrice(productDetails.originalPrice, productDetails.discountPercent)}</p>
-          <p className="discounted-price text-secondaryGray">${productDetails.originalPrice}</p>
+          <p className="discounted-price text-primaryRed">${getDiscountedPrice(productDetails.price, productDetails.discount)}</p>
+          <p className="discounted-price text-secondaryGray">${productDetails.price}</p>
         </span>
 
         <span className="product-rating flex items-center gap-2">
