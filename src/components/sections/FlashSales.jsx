@@ -59,7 +59,6 @@ export default function FlashSales() {
         <SectionSlider breakpoints={breakpoints} prevBtn=".flash-sales.prev-btn" nextBtn=".flash-sales.next-btn">
           {productDetails.map(product => (
             <swiper-slide key={product._id} >
-              {console.log(product.images[0])}
               <ProductContainer productDetails={product}/>
             </swiper-slide>
           ))}

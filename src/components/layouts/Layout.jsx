@@ -7,7 +7,7 @@ import ProductProvider from '../../context/ProductContext';
 export default function Layout() {
   return (
     <>
-      <TopHeader/>
+      <TopHeader />
       <ProductProvider>
         <Header/>
         <Outlet />

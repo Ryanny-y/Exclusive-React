@@ -1,6 +1,9 @@
 import { useState } from "react"
+import useScrollToTop from '../../utils/hooks/useScrollToTop';
 
 export default function Login() {
+
+  useScrollToTop();
 
   return (
     <main className="login relative my-16" data-aos="fade-up" data-aos-delay="100">
@@ -13,13 +16,13 @@ export default function Login() {
             <h1 className="font-semibold tracking-wider text-3xl">Login To Exclusive</h1>
             <p className="font-medium">Enter your details below</p>
 
-            <label className="absolute -right-96" htmlFor="email-or-phone">Email or Phone Number</label>
+            <label className="absolute -right-96" htmlFor="username">Username</label>
             <input
               className="border-b border-b-dark outline-none text-secondaryGray placeholder:text-secondaryGray py-2"
-              type="email"
-              id="email-or-phone"
+              type="username"
+              id="username"
               required
-              placeholder="Email or Phone Number"
+              placeholder="Username"
             />
 
             <label className="absolute -right-96" htmlFor="password">Password</label>

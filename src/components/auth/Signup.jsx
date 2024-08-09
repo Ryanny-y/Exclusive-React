@@ -1,7 +1,53 @@
-import { useState } from "react"
-import { Link } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Signup() {
+
+  const { setIsAuthorized, setUserData } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [ name, setName ] = useState('');
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState(''); 
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if(!name || !username || !password) {
+      console.error('All field are required!');
+      return;
+    };
+    
+    try {
+      const response = await fetch('http://localhost:3500/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          first_name: name,
+          username,
+          password
+        }),
+        credentials: 'include'
+      });
+
+      if (!response.ok) {
+        // Parse error response
+        const errorData = await response.json();
+        const errorMessage = errorData.message;
+        throw new Error(errorMessage);
+      }
+      
+      const data = await response.json();
+      
+      console.log('success', data);
+      navigate('/Exclusive-React/login')
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <main className="signup relative my-16" data-aos="fade-up" data-aos-delay="100">
@@ -9,7 +55,7 @@ export default function Signup() {
         <section id="form" className="w-96 flex flex-col gap-4 bg-white rounded-md px-5 py-24">
           <form
             className="flex flex-col gap-6 w-full relative overflow-hidden"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSignUp}
           >
             <h1 className="font-semibold tracking-wider text-3xl">Create an account</h1>
             <p className="font-medium">Enter your details below</p>
@@ -21,15 +67,19 @@ export default function Signup() {
               id="name"
               required
               placeholder="Name"
+              value={name}
+              onChange={(e) => setName(curName => e.target.value)}
             />
 
-            <label className="absolute -right-96" htmlFor="email-or-phone">Email or Phone Number</label>
+            <label className="absolute -right-96" htmlFor="username">Username</label>
             <input
               className="border-b border-b-dark outline-none text-secondaryGray placeholder:text-secondaryGray py-2"
-              type="email"
-              id="email-or-phone"
+              type="username"
+              id="username"
               required
-              placeholder="Email or Phone Number"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(curUsername => e.target.value)}
             />
 
             <label className="absolute -right-96" htmlFor="password">Password</label>
@@ -39,6 +89,8 @@ export default function Signup() {
               id="password"
               required
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(curPassword => e.target.value)}
             />
 
             <button type="submit" className="w-full bg-primaryRed text-white h-bg-red py-4 font-medium rounded-md">Create An Account</button>

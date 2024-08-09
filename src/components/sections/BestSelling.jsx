@@ -1,59 +1,17 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import SectionContainer from '../layouts/SectionContainer';
 import SectionHeader from "../ui/SectionHeader";
 import SectionSlider from '../ui/sliders/SectionSlider';
 import ProductContainer from '../ui/ProductContainer';
 import { Link } from "react-router-dom";
+import { ProductContext } from "../../context/ProductContext";
 
 export default function BestSelling() {
 
-  const [ productDetails, setProductDetails ] = useState([
-    {
-      id: '1',
-      images: ['HAVIT Hv-G92 Gamepad.png'],
-      name: 'HAVIT HV-G92 Gamepad',
-      price: 160,
-      discount: .6,
-      ratings: {
-        stars: 5,
-        count: 88
-      },
-    },
-    {
-      id: '2',
-      images: ['HAVIT Hv-G92 Gamepad.png'],
-      name: 'HAVIT HV-G92 Gamepad',
-      price: 19099,
-      discount: .40,
-      ratings: {
-        stars: 4.5,
-        count: 88
-      },
-    },
-    {
-      id: '3',
-      images: ['HAVIT Hv-G92 Gamepad.png'],
-      name: 'HAVIT HV-G92 Gamepad',
-      price: 160,
-      discount: .40,
-      ratings: {
-        stars: 5,
-        count: 88
-      },
-    },
-    {
-      id: '4',
-      images: ['HAVIT Hv-G92 Gamepad.png'],
-      name: 'HAVIT HV-G92 Gamepad',
-      price: 19099,
-      discount: .40,
-      ratings: {
-        stars: 4.5,
-        count: 88
-      },
-    },
-  ]);
+  const { products } = useContext(ProductContext);
 
+  const sortedProducts = products.sort((a, b) => a.ratings.count > b.ratings.count ? -1 : a.ratings.count < b.ratings.count ? 1 : 0).slice(0, 6);
+  
   const breakpoints= {
     480: {
         slidesPerView: 2,
@@ -78,8 +36,8 @@ export default function BestSelling() {
       </SectionHeader>
 
       <SectionSlider breakpoints={breakpoints}>
-        {productDetails.map(product => (
-          <swiper-slide key={product.id}>
+        {sortedProducts.map(product => (
+          <swiper-slide key={product._id}>
             <ProductContainer productDetails={product}/>
           </swiper-slide>
         ))}

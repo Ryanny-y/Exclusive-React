@@ -4,10 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping, faStore, faSackDollar } from '@fortawesome/free-solid-svg-icons'
 import { FaDollarSign  } from 'react-icons/fa';
 import AboutService from "../layouts/AboutService"
+import useScrollToTop from '../../utils/hooks/useScrollToTop';
 
 export default function About() {
 
   const headers = ['Home', 'About']
+
+  useScrollToTop();
 
   return (
     <main className="about pt-20 pb-28">
