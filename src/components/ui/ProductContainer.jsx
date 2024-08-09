@@ -18,7 +18,6 @@ export default function ProductContainer({productDetails}) {
         {!productDetails.discount || productDetails.discount > 0 && 
           <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">-{productDetails.discount * 100}%</p>
         }
-        
 
         <img 
           src={`http://localhost:3500/image/${productDetails.images[0]}`} 
@@ -30,7 +29,7 @@ export default function ProductContainer({productDetails}) {
           }}
         />
 
-        <AddToCartBtn hovered={hovered}/>
+        <AddToCartBtn hovered={hovered} productId={productDetails._id} />
       </div>
       <div className="product-details flex flex-col gap-2 font-semibold">
         <h1>{productDetails.name}</h1>

@@ -48,3 +48,11 @@ body {
 .h-bg-white-a:hover > span::after {
   opacity: 50%;
 }
+
+/* transparent bg */
+.bg-blur::before {
+  background: rgba(163, 163, 163, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.6px);
+}

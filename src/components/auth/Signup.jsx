@@ -1,10 +1,8 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
 
 export default function Signup() {
 
-  const { setIsAuthorized, setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [ name, setName ] = useState('');
@@ -33,17 +31,14 @@ export default function Signup() {
       });
 
       if (!response.ok) {
-        // Parse error response
         const errorData = await response.json();
         const errorMessage = errorData.message;
         throw new Error(errorMessage);
       }
       
-      const data = await response.json();
+      await response.json();
       
-      console.log('success', data);
       navigate('/Exclusive-React/login')
-      
     } catch (error) {
       console.log(error.message);
     }
