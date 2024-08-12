@@ -127,8 +127,38 @@ export default function CartProvider({children}) {
     }
   }
 
+  const deleteFromCart = async (productId) => {
+    try {
+      const response = await fetch('http://localhost:3500/cart', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          userId: userData.id,
+          productId
+        }),
+        credentials: 'include'
+      });
+
+      if(!response.ok) {
+        const errData = await response.json();
+        const errMsg = errData.message || errData.statusText;
+        throw new Error(errMsg);
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      setCartChanged(prev => !prev)
+    } catch (error) {
+      console.log(error.message)
+    }
+  };
+
   const value = {
-    cartDetails, cartItems, addToCart, updateCartQuantity
+    cartDetails, cartItems, addToCart, updateCartQuantity, deleteFromCart
   }
 
   return (

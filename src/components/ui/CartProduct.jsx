@@ -1,9 +1,11 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useContext } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp, faChevronDown, faX } from '@fortawesome/free-solid-svg-icons'
+import { CartContext } from "../../context/CartContext";
 
 export default function CartProduct({productDetails, handleQuantityChange}) {
 
+  const { deleteFromCart } = useContext(CartContext);
   const [ productQuantity, setProductQuantity ] = useState(String(productDetails.quantity));
   const subtotal = productDetails.price * Number(productQuantity);
 
@@ -60,12 +62,17 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
       <div className="product-img flex gap-5 flex-wrap relative">
         <img src={`http://localhost:3500/image/${productDetails.images[0]}`} alt="Product Image" className="w-10 h-10"/>
         <p className="text-sm">{productDetails.name}</p>
+        {/* delete button */}
+        <button className="delete-btn flex items-center justify-center p-1.5 h-4 w-4 text-white bg-primaryRed rounded-full absolute -top-1.5 -left-2" style={{'fontSize': '10px'}} onClick={() => deleteFromCart(productDetails._id)}>
+          <FontAwesomeIcon icon={faX}/>
+        </button>
+        
       </div>
 
       <h1 className="justify-self-center">${productDetails.price}</h1>
 
       <div className="quantity justify-self-center h-7 text-center w-12 relative">
-        <input ref={inputRef} type="text" value={productQuantity} className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" onChange={(e) => changeQuantity(e)} onKeyDown={(e) => verifyChangeQuantity(e)}/>
+        <input ref={inputRef} type="text" value={productQuantity < 10 ? `0${productQuantity}` : productQuantity} className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" onChange={(e) => changeQuantity(e)} onKeyDown={(e) => verifyChangeQuantity(e)}/>
         <button className="absolute top-1 right-2" style={{fontSize:'8px'}} onClick={() => incrementQuantity()}><FontAwesomeIcon icon={faChevronUp}/></button>
         <button className="absolute bottom-1 right-2" style={{fontSize:'8px'}} onClick={() => decrementQuantity()}><FontAwesomeIcon icon={faChevronDown}/></button>
       </div>
