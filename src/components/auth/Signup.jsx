@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import useScrollToTop from '../../utils/hooks/useScrollToTop';
 
 export default function Signup() {
 
   const navigate = useNavigate();
+  useScrollToTop();
 
   const [ name, setName ] = useState('');
   const [ username, setUsername ] = useState('');

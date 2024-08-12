@@ -6,21 +6,27 @@ import { faHeart, faUser } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom' 
 import { AuthContext } from "../../context/AuthContext";
 import { CartContext } from "../../context/CartContext";
+import { WishlistContext } from "../../context/WishlistContext";
 
 export default function SearchBar() {
   const { searchProduct: searchContext, setSearchProduct } = useContext(ProductContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
-
+  const { wishlistItems } = useContext(WishlistContext)
   
   const [ showUserOption, setShowUserOption ] = useState(false);
   const userOptionClass = `${showUserOption ? 'block' : 'hidden'} absolute top-10 right-0 w-52 pl-5 bg-transparent pr-3 py-4 rounded-sm flex flex-col gap-2 text-white before:absolute before:blur bg-blur before:top-1 before:bottom-0 before:right-0 before:w-52 before:-z-10`
   const [ cartLength, setCartLength ] = useState(0);
+  const [ wishlistLength, setWishlistLength ] = useState(0);
 
   //* EFFECT TO CHANGE THE CART LENGTH WHENEVER THE CART CHANGED
   useEffect(() => {
     setCartLength(cartItems.length);
   }, [cartItems])
+
+  useEffect(() => {
+    setWishlistLength(wishlistItems.length)
+  }, [wishlistItems])
 
   const searchProduct = searchContext || '';
 
@@ -37,10 +43,15 @@ export default function SearchBar() {
         <FontAwesomeIcon className="absolute top-1/2 -translate-y-1/2 right-3" icon={faMagnifyingGlass} />
       </div>
 
-      <Link to='wishlist'><FontAwesomeIcon icon={faHeart} className="text-xl h-text-red"/></Link>
+      <Link to='wishlist' className="relative">
+        <FontAwesomeIcon icon={faHeart} className="text-xl h-text-red"/>
+        {isAuthenticated && wishlistLength > 0 && 
+          <h1 className="absolute text-white bg-primaryRed -top-2 -right-3 h-4 w-4 rounded-full text-xs flex items-center justify-center">{wishlistLength}</h1>
+        }
+      </Link>
       <Link to='cart' className="relative">
         <FontAwesomeIcon icon={faCartShopping} className="text-xl h-text-red -mr-1"/>
-        {isAuthenticated && 
+        {isAuthenticated && cartLength > 0 && 
           <h1 className="absolute text-white bg-primaryRed -top-2 -right-3 h-4 w-4 rounded-full text-xs flex items-center justify-center">{cartLength}</h1>
         }
       </Link>

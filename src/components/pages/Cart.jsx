@@ -6,8 +6,11 @@ import { AuthContext } from "../../context/AuthContext";
 import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
 import useRedirect from "../../utils/hooks/useRedirect";
+import useScrollToTop from '../../utils/hooks/useScrollToTop';
 
 export default function Cart() {
+  useScrollToTop();
+  
   // context
   const { isAuthenticated } = useContext(AuthContext);
   const { products } = useContext(ProductContext);
@@ -35,7 +38,7 @@ export default function Cart() {
 
   const headers = ['Home', 'Cart'];
   return (
-    <main className="not-found pt-20 pb-28">
+    <main className="not-found pt-20 pb-28" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex flex-col gap-20">
         <SmallHeader headers={headers} />
 

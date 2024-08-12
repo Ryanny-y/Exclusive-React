@@ -2,12 +2,15 @@ import SmallHeader from '../ui/SmallHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
+import useScrollToTop from '../../utils/hooks/useScrollToTop';
 
 export default function Contact() {
+  useScrollToTop();
+
   const headers = ['Home', 'Contact']
 
   return (
-    <main className="contact py-16">
+    <main className="contact py-16" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex-col gap-20">
         <SmallHeader headers={headers}/>
 
