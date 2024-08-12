@@ -12,13 +12,15 @@ import useFetchData from "../../utils/hooks/useFetchData";
 export default function FlashSales() {
   const [ productDetails, setProductDetails ] = useState([]);
 
-  const url = 'http://localhost:3500/flashsales'
+  const url = 'http://localhost:3500/products'
 
   const { data, error, isLoading } = useFetchData(url);
 
   useEffect(() => {
     if (!error && !isLoading && data.length) {
-      setProductDetails(data);
+      const filteredProducts = data.filter(product => product.discount);
+      setProductDetails(filteredProducts);
+      
     }
   }, [data, error, isLoading]);
   

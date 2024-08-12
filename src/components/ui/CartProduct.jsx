@@ -1,45 +1,71 @@
 import { useRef, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
-export default function CartProduct({productDetails}) {
 
-  const [ productQuantity, setProductQuantity ] = useState(1)
-  const subtotal = productDetails.originalPrice * productQuantity
+export default function CartProduct({productDetails, handleQuantityChange}) {
+
+  const [ productQuantity, setProductQuantity ] = useState(String(productDetails.quantity));
+  const subtotal = productDetails.price * Number(productQuantity);
 
   const inputRef = useRef(null);
-
+  
   const incrementQuantity = () => {
-    setProductQuantity(currentQuantity => currentQuantity + 1);
+    setProductQuantity(prevQuantity => {
+      const newQuantity = Number(prevQuantity) + 1;
+      handleQuantityChange(productDetails._id, newQuantity)
+      return newQuantity
+    });
   };
 
   const decrementQuantity = () => {
-    setProductQuantity(currentQuantity => {
-      if(currentQuantity > 1) {
-        return currentQuantity - 1;
+    setProductQuantity(prevQuantity => {
+      if(prevQuantity > 1) {
+        const newQuantity = Number(prevQuantity) - 1;
+        handleQuantityChange(productDetails._id, newQuantity)
+        inputRef.current.focus();
+        return newQuantity
       } else {
         alert('Are you sure you want to remove this product?');
         // This should remove the product not return anything
-        return currentQuantity;
+        return Number(prevQuantity);
       }
     });
   };
 
-  const changeQuantity = () => {
+  const changeQuantity = (e) => {
+    const value = e.target.value;
 
+    if(!isNaN(value) && value >= 0) {
+      setProductQuantity(e.target.value);
+    }
   };
 
+  // add a validation using keydown event
+  const verifyChangeQuantity = (e) => {
+    if(e.key === 'Enter') {
+      const newQuantity = Number(productQuantity);
+      if(newQuantity <= 0) {
+        alert('Are you sure you want to delete this product?');
+        return;
+      }
+      setProductQuantity(prevQuantity => {
+        handleQuantityChange(productDetails._id, newQuantity)
+        return newQuantity
+      });
+    }
+  };
 
   return (
     <div className="grid grid-cols-4">
       <div className="product-img flex gap-5 flex-wrap relative">
-        <img src={productDetails.image} alt="Product Image" className="w-10 h-10"/>
+        <img src={`http://localhost:3500/image/${productDetails.images[0]}`} alt="Product Image" className="w-10 h-10"/>
         <p className="text-sm">{productDetails.name}</p>
       </div>
 
-      <h1 className="justify-self-center">${productDetails.originalPrice}</h1>
+      <h1 className="justify-self-center">${productDetails.price}</h1>
 
       <div className="quantity justify-self-center h-7 text-center w-12 relative">
-        <input ref={inputRef} type="text" value={productQuantity} className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" onChange={(e) => console.log(e)}/>
+        <input ref={inputRef} type="text" value={productQuantity} className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" onChange={(e) => changeQuantity(e)} onKeyDown={(e) => verifyChangeQuantity(e)}/>
         <button className="absolute top-1 right-2" style={{fontSize:'8px'}} onClick={() => incrementQuantity()}><FontAwesomeIcon icon={faChevronUp}/></button>
         <button className="absolute bottom-1 right-2" style={{fontSize:'8px'}} onClick={() => decrementQuantity()}><FontAwesomeIcon icon={faChevronDown}/></button>
       </div>

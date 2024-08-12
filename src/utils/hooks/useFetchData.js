@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 
-const useFetchData = (dataUrl) => {
+const useFetchData = (dataUrl, reqBody = {}) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => { 
+  useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
 
-    const fetchData = async (url) => {
+    const fetchData = async (url, options) => {
       setIsLoading(true);
       try {
-        const response = await fetch(url, { signal: controller.signal });
+        const response = await fetch(url, { ...options, signal: controller.signal });
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -33,7 +33,7 @@ const useFetchData = (dataUrl) => {
       }
     };
 
-    fetchData(dataUrl);
+    fetchData(dataUrl, reqBody);
 
     return () => {
       isMounted = false;

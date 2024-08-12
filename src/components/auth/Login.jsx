@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 export default function Login() {
 
   // auth context
-  const { setUserData, setIsAuthenticated } = useContext(AuthContext);
+  const { setUserData, setIsAuthenticated, setAccessToken } = useContext(AuthContext);
 
   useScrollToTop();
 
@@ -45,8 +45,10 @@ export default function Login() {
       }
 
       const data = await response.json();
-
-      setUserData(data);
+      const { data: userData } = data
+      
+      setUserData(userData);
+      setAccessToken(data.accessToken)
       setIsAuthenticated(true);
       navigate('/Exclusive-React/')
     } catch (error) {

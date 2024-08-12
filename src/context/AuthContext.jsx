@@ -1,17 +1,28 @@
 import { createContext, useState, useEffect } from "react";
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext({
+  userData: {
+    first_name: '',
+    username: '',
+    id: ''
+  },
+  setUserData(){},
+
+});
 
 const AuthProvider = ({children}) => {
 
-  const [ userData, setUserData ] = useState({});
+  const [ userData, setUserData ] = useState({
+    // maybe pass the empty prop value
+  });
   const [ isAuthenticated, setIsAuthenticated ] = useState(false);
+  const [ accessToken, setAccessToken ] = useState('');
 
   // 
-
   const authValue = {
     userData, setUserData,
-    isAuthenticated, setIsAuthenticated
+    isAuthenticated, setIsAuthenticated,
+    accessToken, setAccessToken
   }
 
   return (

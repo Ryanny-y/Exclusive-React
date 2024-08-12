@@ -1,16 +1,28 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHeart, faUser } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom' 
 import { AuthContext } from "../../context/AuthContext";
+import { CartContext } from "../../context/CartContext";
 
 export default function SearchBar() {
-  const { searchProduct, setSearchProduct } = useContext(ProductContext);
+  const { searchProduct: searchContext, setSearchProduct } = useContext(ProductContext);
   const { isAuthenticated } = useContext(AuthContext);
+  const { cartItems } = useContext(CartContext);
+
+  
   const [ showUserOption, setShowUserOption ] = useState(false);
   const userOptionClass = `${showUserOption ? 'block' : 'hidden'} absolute top-10 right-0 w-52 pl-5 bg-transparent pr-3 py-4 rounded-sm flex flex-col gap-2 text-white before:absolute before:blur bg-blur before:top-1 before:bottom-0 before:right-0 before:w-52 before:-z-10`
+  const [ cartLength, setCartLength ] = useState(0);
+
+  //* EFFECT TO CHANGE THE CART LENGTH WHENEVER THE CART CHANGED
+  useEffect(() => {
+    setCartLength(cartItems.length);
+  }, [cartItems])
+
+  const searchProduct = searchContext || '';
 
   return (
     <div className="flex items-center justify-end gap-5 basis-80 grow">
@@ -26,7 +38,12 @@ export default function SearchBar() {
       </div>
 
       <Link to='wishlist'><FontAwesomeIcon icon={faHeart} className="text-xl h-text-red"/></Link>
-      <Link to='cart'><FontAwesomeIcon icon={faCartShopping} className="text-xl h-text-red -mr-1"/></Link>
+      <Link to='cart' className="relative">
+        <FontAwesomeIcon icon={faCartShopping} className="text-xl h-text-red -mr-1"/>
+        {isAuthenticated && 
+          <h1 className="absolute text-white bg-primaryRed -top-2 -right-3 h-4 w-4 rounded-full text-xs flex items-center justify-center">{cartLength}</h1>
+        }
+      </Link>
 
       {isAuthenticated && 
         <div className="relative">
