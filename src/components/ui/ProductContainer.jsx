@@ -5,8 +5,8 @@ import DeleteBtn from "./buttons/DeleteBtn.jsx";
 import { getDiscountedPrice } from '../../utils/currency.js'
 import { useState } from "react";
 
-export default function ProductContainer({productDetails, isWishlist = false, isJfy}) {
-  const ratingImgSrc = `images/ratings/rating-${productDetails.ratings.stars * 10}.png`
+export default function ProductContainer({productDetails, isWishlist = false, isJfy = false, isDetailed = false}) {
+  const ratingImgSrc = `${isDetailed ? `../` : ''}images/ratings/rating-${productDetails.ratings.stars * 10}.png`
 
   const [ hovered, setHovered ] = useState(false);
 
@@ -15,11 +15,11 @@ export default function ProductContainer({productDetails, isWishlist = false, is
       <div className="product-image p-10 bg-secondaryLight rounded-sm flex justify-center relative overflow-hidden"
       onMouseEnter={() => setHovered(c => !c)} onMouseLeave={() => setHovered(c => !c)}>
         <WishlistBtn productId={productDetails._id} isWishlist={isWishlist}/>
-        <ViewProductBtn isWishlist={isWishlist}/>
+        <ViewProductBtn productId={productDetails._id} isWishlist={isWishlist}/>
         {!productDetails.discount || productDetails.discount > 0 && 
           <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">-{productDetails.discount * 100}%</p>
         }
-        <DeleteBtn productId={productDetails._id} isWishlist={isWishlist} isJfy={isJfy}/>
+        {isWishlist && <DeleteBtn productId={productDetails._id} isWishlist={isWishlist} isJfy={isJfy}/>}
 
         <img 
           src={`http://localhost:3500/image/${productDetails.images[0]}`} 

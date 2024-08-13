@@ -11,6 +11,7 @@ import Wishlist from './components/pages/Wishlist.jsx'
 import Login from './components/auth/Login.jsx'
 import Logout from './components/auth/Logout.jsx'
 import Checkout from './components/pages/Checkout.jsx'
+import ProductDetails from './components/pages/ProductDetails.jsx'
 import './index.css'
 import './styles/sliderStyles.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: 'wishlist',
         element: <Wishlist />
+      },
+      {
+        path: 'product/:productId',
+        element: <ProductDetails />
       },
       {
         path: 'login',

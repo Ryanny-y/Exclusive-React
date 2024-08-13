@@ -18,6 +18,7 @@ export default function Contact() {
           <div className="left-section flex flex-col gap-20 py-10 px-8 cursor-pointer sm:basis-96">
             <div className='flex flex-col gap-4 relative after:absolute after:-bottom-10 after:h-0.5 after:left-0 after:w-full after:bg-secondaryGray'>
               <h1 className='font-semibold text-lg flex items-center gap-4'><FontAwesomeIcon icon={faPhone} className='bg-primaryRed text-white p-3 rounded-full'/> <span>Call To Us</span></h1>
+              <img src="/images/ratings/rating-15.png" alt="star" />
               <p>We are available 24/7, 7 days a week.</p>
               <a href="tel:+8801611112222" className='h-text-red'>Phone: +8801611112222</a>
             </div>
