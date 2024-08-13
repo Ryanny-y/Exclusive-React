@@ -95,7 +95,7 @@ export default function Login() {
             
             <div className="btns flex justify-between text-nowrap gap-20">
               <button type="submit" className=" bg-primaryRed text-white h-bg-red font-medium rounded-md w-full py-4">Log in</button>
-              <button type="button" className=" text-primaryRed h-bg-red hover:text-white w-full py-4">Forgot Password? </button>
+              <button type="button" className=" text-primaryRed hover:text-black duration-200 w-full py-4">Forgot Password? </button>
             </div>
           </form>
         </section>

@@ -13,7 +13,6 @@ export default function SearchBar() {
   const { isAuthenticated } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
   const { wishlistItems } = useContext(WishlistContext)
-  
   const [ showUserOption, setShowUserOption ] = useState(false);
   const userOptionClass = `${showUserOption ? 'block' : 'hidden'} absolute top-10 right-0 w-52 pl-5 bg-transparent pr-3 py-4 rounded-sm flex flex-col gap-2 text-white before:absolute before:blur bg-blur before:top-1 before:bottom-0 before:right-0 before:w-52 before:-z-10`
   const [ cartLength, setCartLength ] = useState(0);
@@ -74,7 +73,7 @@ export default function SearchBar() {
             </li>
             <li className="h-text-red">
               {/* Link */}
-              <Link to='/logout'> Logout</Link>
+              <Link to='/Exclusive-React/logout'> Logout</Link>
             </li>
           </ul>
         </div>

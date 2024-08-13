@@ -9,6 +9,7 @@ import NotFound from './components/pages/NotFound.jsx'
 import Cart from './components/pages/Cart.jsx'
 import Wishlist from './components/pages/Wishlist.jsx'
 import Login from './components/auth/Login.jsx'
+import Logout from './components/auth/Logout.jsx'
 import Checkout from './components/pages/Checkout.jsx'
 import './index.css'
 import './styles/sliderStyles.css'
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />
+      },
+      {
+        path: 'logout',
+        element: <Logout />
       },
       {
         path: "*",

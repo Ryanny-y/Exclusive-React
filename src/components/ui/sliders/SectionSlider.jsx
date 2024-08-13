@@ -1,5 +1,6 @@
 
 export default function SectionSlider({children, breakpoints = {}, prevBtn, nextBtn}) {
+  
   return (
     <div className="slider-container gap-5">
       <swiper-container 

@@ -3,7 +3,7 @@ import SectionHeader from "../ui/SectionHeader";
 import SectionSlider from "../ui/sliders/SectionSlider";
 import CategoryBox from "../ui/CategoryBox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMobileScreenButton, faDesktop, faCamera, faHeadphones, faGamepad } from '@fortawesome/free-solid-svg-icons';
+import { faMobileScreenButton, faDesktop, faCamera, faHeadphones, faGamepad, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { MdWatch } from 'react-icons/md';
 
 export default function Category() {
@@ -72,13 +72,27 @@ export default function Category() {
     }
   }
  
+  const prevBtn = (
+    <FontAwesomeIcon icon={faArrowLeft} className="p-3 bg-secondaryLight rounded-full category prev-btn"/>
+  );
+  
+  const nextBtn = (
+    <FontAwesomeIcon icon={faArrowRight} className="p-3 bg-secondaryLight rounded-full category next-btn"/>
+  );
+  
+
   return (
     <SectionContainer classname="category">
       <SectionHeader sectionTitle="Categories" sectionHeader='Browse By Category' > 
         {/* Insert a Navigation for the slider */}
-      </SectionHeader>
 
-      <SectionSlider breakpoints={breakpoints}>
+        <div className="flex items-center gap-2 self-end grow justify-end">
+          {prevBtn}
+          {nextBtn}
+        </div>
+      </SectionHeader>
+    
+      <SectionSlider breakpoints={breakpoints} prevBtn=".category.prev-btn" nextBtn=".category.next-btn">
         {categories.map(category => (
           <swiper-slide key={category.id} >
             <CategoryBox category={category}/>
