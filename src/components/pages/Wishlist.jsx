@@ -19,40 +19,36 @@ export default function Wishlist() {
 
   //* FIND THE MATCHING PRODUCT AND ASSIGN IN TO PRODUCT DETAILS
   useEffect(() => {
-    if(wishlistItems.length) {
-      const filteredProduct = wishlistItems.map(item => {
-        const matchingProduct = products.find(product => product._id === item.productId);
-        return matchingProduct;
-      })
-      
-      setWishlistProducts(filteredProduct);
-    }
+    const filteredProduct = wishlistItems.map(item => {
+      const matchingProduct = products.find(product => product._id === item.productId);
+      return matchingProduct;
+    })
+    
+    setWishlistProducts(filteredProduct);
   }, [wishlistItems])
 
   // JUST FOR YOU PRODUCTS
   const [ jfyProducts, setJfyProducts ] = useState([]);
   useEffect(() => {
-    if(wishlistItems.length) {
-      const filteredCategory = wishlistItems.map(item => {
-        const matchingProduct = products.find(product => product._id === item.productId);
-        return matchingProduct.category;
-      })
-      const combinedArray = filteredCategory.flat();
-      const removedDuplicate = combinedArray.filter((item, i) => combinedArray.indexOf(item) === i);
+    const filteredCategory = wishlistItems.map(item => {
+      const matchingProduct = products.find(product => product._id === item.productId);
+      return matchingProduct.category;
+    })
+    const combinedArray = filteredCategory.flat();
+    const removedDuplicate = combinedArray.filter((item, i) => combinedArray.indexOf(item) === i);
 
-      // FIND THE MATCHING PRODUCT THAT HAS THE SAME CATEGORY
-      const filteredProducts = products.filter(product => 
-        product?.category.some(category => 
-          removedDuplicate.some(item => category.includes(item))
-        )
-      );
-      
-      const jfyProductArr = filteredProducts.filter(product => 
-        !wishlistItems.some(item => item.productId === product._id)
-      );
-      
-      setJfyProducts(jfyProductArr);
-    }
+    // FIND THE MATCHING PRODUCT THAT HAS THE SAME CATEGORY
+    const filteredProducts = products.filter(product => 
+      product?.category.some(category => 
+        removedDuplicate.some(item => category.includes(item))
+      )
+    );
+    
+    const jfyProductArr = filteredProducts.filter(product => 
+      !wishlistItems.some(item => item.productId === product._id)
+    );
+    
+    setJfyProducts(jfyProductArr);
   }, [wishlistItems])
 
   return (
@@ -60,7 +56,7 @@ export default function Wishlist() {
       <div className="container mx-auto py-20 flex flex-col gap-20">
         <WishlistContainer header='Wishlist' productList={wishlistProducts}/>
 
-        <WishlistContainer header='Just For You' productList={jfyProducts}/>
+        <WishlistContainer header='Just For You' productList={jfyProducts} isJfy={true}/>
       </div>
     </main>
   )

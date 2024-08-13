@@ -1,5 +1,6 @@
 import { useEffect, createContext, useState, useContext } from "react";
 import { AuthContext } from './/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const WishlistContext = createContext({});
 
@@ -9,6 +10,7 @@ const WishlistProvider = ({ children }) => {
   const [ wishlistDetails, setWishlistDetails ] = useState({});
   const [ wishlistItems, setWishlistItems ] = useState([]);
   const [ wishlistChange, setWishlistChange ] = useState(false);
+  const navigate = useNavigate();
 
   //* FETCH DATA FROM THE WISHLIST AND STORE IT TO THE WISHLIST PRODUCTS
   useEffect(() => {
@@ -57,6 +59,11 @@ const WishlistProvider = ({ children }) => {
 
   //* ADD TO WISHLIST
   const addToWishlist = async (productId) => {
+    if(!isAuthenticated) {
+      navigate('/Exclusive-React/login');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3500/wishlist', {
         method: 'POST',

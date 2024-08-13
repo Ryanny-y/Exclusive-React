@@ -22,14 +22,12 @@ export default function Cart() {
   
   //* EFFECT TO FIND THE MATCHING PRODUCT OF THE CART ITEMS AND STORE IN PRODUCT DETAILS
   useEffect(() => {
-    if(cartItems?.length) {
-      const matchingProducts = cartItems.map(item => {
-        const match = products.find(product => product._id === item.productId);
-        return { ...match, ...item};
-      });
+    const matchingProducts = cartItems.map(item => {
+      const match = products.find(product => product._id === item.productId);
+      return { ...match, ...item};
+    });
 
-      setProductDetails(matchingProducts);
-    }
+    setProductDetails(matchingProducts);
   }, [cartItems])
 
   const handleQuantityChange = (productId, quantity) => {

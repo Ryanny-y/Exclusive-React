@@ -30,15 +30,15 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="right-section flex flex-col gap-8 flex-grow items-start px-8 py-10 shrink w-64">
+          <form onSubmit={(e) => e.preventDefault()} className="right-section flex flex-col gap-8 flex-grow items-start px-8 py-10 shrink w-64">
             <div className='flex gap-4 flex-wrap w-full'>
-              <input type="text" className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' placeholder='Your Name'/>
-              <input type="text" className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' placeholder='Your Email'/>
-              <input type="text" className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' placeholder='Your Phone'/>
+              <input type="text" required className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' placeholder='Your Name'/>
+              <input type="email" required className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' placeholder='Your Email'/>
+              <input type='tel' required className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' placeholder='Your Phone'/>
             </div>
-            <textarea name="" id="" className='flex-grow w-full rounded-md bg-secondaryLight outline-none h-52 p-3' placeholder='Your Message'></textarea>
+            <textarea name="" id="" required className='flex-grow w-full rounded-md bg-secondaryLight outline-none h-52 p-3' placeholder='Your Message'></textarea>
             <button className="bg-primaryRed text-white py-4 px-12 font-medium h-bg-red self-end rounded-md">Send Message</button>
-          </div>    
+          </form>    
         </section>
       </div>
     </main>
