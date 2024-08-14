@@ -7,6 +7,7 @@ import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
 import useRedirect from "../../utils/hooks/useRedirect";
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
+import { getDiscountedPrice } from "../../utils/currency";
 
 export default function Cart() {
   useScrollToTop();
@@ -17,7 +18,10 @@ export default function Cart() {
 
   // const items
   const [ productDetails, setProductDetails ] = useState([]);
-  const { cartItems, updateCartQuantity } = useContext(CartContext) 
+  const { cartItems, updateCartQuantity } = useContext(CartContext);
+  const [ subtotal, setSubtotal ] = useState(0);
+  const [ shippingFee, setShippingFee ] = useState(0);
+  const [ total, setTotal ] = useState(0)
   useRedirect(isAuthenticated, '/Exclusive-React/login');
   
   //* EFFECT TO FIND THE MATCHING PRODUCT OF THE CART ITEMS AND STORE IN PRODUCT DETAILS
@@ -28,11 +32,28 @@ export default function Cart() {
     });
 
     setProductDetails(matchingProducts);
+
+    // CALCULATE THE CART TOTAL OF THE PRODUCTS
+    const subtotal = matchingProducts.reduce((acc, cur) => acc + (getDiscountedPrice(cur.price, cur?.discount) * cur.quantity), 0);
+    setSubtotal(subtotal);
+    if(subtotal < 140) {
+      setShippingFee(prev => {
+        const newShipping = 99;
+        setTotal(subtotal + newShipping);
+        return newShipping;
+      });
+    } else {
+      setShippingFee(prev => {
+        const newShipping = 0;
+        setTotal(subtotal + newShipping);
+        return newShipping;
+      });
+    }
   }, [cartItems])
 
   const handleQuantityChange = (productId, quantity) => {
     updateCartQuantity(productId, quantity)
-  }
+  };
 
   const headers = ['Home', 'Cart'];
   return (
@@ -67,13 +88,13 @@ export default function Cart() {
 
           <div className="cart-total flex flex-col gap-6 py-6 px-8 border border-dark rounded-md basis-5/12 flex-grow lg:grow-0">
             <h1 className="text-lg font-semibold">Cart Total</h1>
-            <p className="flex items-center justify-between"><span>Subtotal:</span> $100</p>
+            <p className="flex items-center justify-between"><span>Subtotal:</span> ${subtotal}</p>
 
             <hr className="h-0.5 bg-dark" />
-            <p className="flex items-center justify-between"><span>Shipping:</span> FREE</p>
+            <p className="flex items-center justify-between"><span>Shipping:</span> {shippingFee ? `$${shippingFee}`: 'FREE'}</p>
 
             <hr className="h-0.5 bg-dark" />
-            <p className="flex items-center justify-between"><span>Total:</span> $100</p>
+            <p className="flex items-center justify-between"><span>Total:</span> ${total}</p>
 
             <Link to='/Exclusive-React/checkout' className="self-center bg-primaryRed text-white font-semibold rounded-md py-4 px-12">Proceed To Checkout</Link>
           </div>

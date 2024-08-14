@@ -2,12 +2,14 @@ import { useRef, useState, useContext } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown, faX } from '@fortawesome/free-solid-svg-icons'
 import { CartContext } from "../../context/CartContext";
+import { getDiscountedPrice } from "../../utils/currency";
 
 export default function CartProduct({productDetails, handleQuantityChange}) {
 
   const { deleteFromCart } = useContext(CartContext);
   const [ productQuantity, setProductQuantity ] = useState(String(productDetails.quantity));
-  const subtotal = productDetails.price * Number(productQuantity);
+  const discountedPrice = getDiscountedPrice(productDetails.price, productDetails.discount);
+  const subtotal = discountedPrice * Number(productQuantity);
 
   const inputRef = useRef(null);
   
@@ -69,7 +71,7 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
         
       </div>
 
-      <h1 className="justify-self-center">${productDetails.price}</h1>
+      <h1 className="justify-self-center">${discountedPrice}</h1>
 
       <div className="quantity justify-self-center h-7 text-center w-12 relative">
         <input ref={inputRef} type="text" value={productQuantity < 10 ? `0${productQuantity}` : productQuantity} className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" onChange={(e) => changeQuantity(e)} onKeyDown={(e) => verifyChangeQuantity(e)}/>
