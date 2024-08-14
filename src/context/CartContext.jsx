@@ -20,7 +20,7 @@ export default function CartProvider({children}) {
     
       const fetchCartData = async () => {
         try {
-          const response = await fetch(`http://localhost:3500/cart/${userData?.id}`, {
+          const response = await fetch(`https://exclusive-api.onrender.com/cart/${userData?.id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function CartProvider({children}) {
     }
 
     try {
-      const response = await fetch('http://localhost:3500/cart', {
+      const response = await fetch('https://exclusive-api.onrender.com/cart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export default function CartProvider({children}) {
   //* HANDLE UPDATE CART QUANTITY
   const updateCartQuantity = async (productId, quantity) => {
     try {
-      const response = await fetch(`http://localhost:3500/cart`, {
+      const response = await fetch(`https://exclusive-api.onrender.com/cart`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export default function CartProvider({children}) {
 
   const deleteFromCart = async (productId) => {
     try {
-      const response = await fetch('http://localhost:3500/cart', {
+      const response = await fetch('https://exclusive-api.onrender.com/cart', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

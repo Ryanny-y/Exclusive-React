@@ -60,7 +60,7 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
   return (
     <div className="grid grid-cols-4">
       <div className="product-img flex gap-5 flex-wrap relative">
-        <img src={`http://localhost:3500/image/${productDetails.images[0]}`} alt="Product Image" className="w-10 h-10"/>
+        <img src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`} alt="Product Image" className="w-10 h-10"/>
         <p className="text-sm">{productDetails.name}</p>
         {/* delete button */}
         <button className="delete-btn flex items-center justify-center p-1.5 h-4 w-4 text-white bg-primaryRed rounded-full absolute -top-1.5 -left-2" style={{'fontSize': '10px'}} onClick={() => deleteFromCart(productDetails._id)}>

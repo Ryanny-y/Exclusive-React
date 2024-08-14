@@ -5,7 +5,7 @@ export const ProductContext = createContext({});
 
 const ProductProvider = ({ children }) => {
 
-  const productsUrl = 'http://localhost:3500/products';
+  const productsUrl = 'https://exclusive-api.onrender.com/products';
 
   const [ products, setProducts ] = useState([]);
   const [ searchProduct, setSearchProduct ] = useState('');

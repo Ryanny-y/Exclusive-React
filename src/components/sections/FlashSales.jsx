@@ -12,7 +12,7 @@ import useFetchData from "../../utils/hooks/useFetchData";
 export default function FlashSales() {
   const [ productDetails, setProductDetails ] = useState([]);
 
-  const url = 'http://localhost:3500/products'
+  const url = 'https://exclusive-api.onrender.com/products'
 
   const { data, error, isLoading } = useFetchData(url);
 

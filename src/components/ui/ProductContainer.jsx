@@ -22,7 +22,7 @@ export default function ProductContainer({productDetails, isWishlist = false, is
         {isWishlist && <DeleteBtn productId={productDetails._id} isWishlist={isWishlist} isJfy={isJfy}/>}
 
         <img 
-          src={`http://localhost:3500/image/${productDetails.images[0]}`} 
+          src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`} 
           alt="product image" 
           style={{
             width: '100%',

@@ -13,7 +13,6 @@ import ProductContainer from '../ui/ProductContainer';
 
 export default function ProductDetails() {
 
-  const rating = `images/ratings/rating-15.png`
   useScrollToTop();
   // const variables  
   const { productId } = useParams();
@@ -83,7 +82,7 @@ export default function ProductDetails() {
           ? <p>Loading...</p> 
           : <section className='flex flex-col md:flex-row justify-between gap-20'>
               <div className="product-img basis-1/2 shrink-0 bg-secondaryLight flex items-center justify-center p-10">
-                <img src={`http://localhost:3500/image/${productDetails.images[0]}`} alt="Product Img" className='h-80'/>
+                <img src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`} alt="Product Img" className='h-80'/>
               </div>
 
               <div className="product-details flex flex-col gap-4 flex-grow basis-1/4">
@@ -104,7 +103,7 @@ export default function ProductDetails() {
 
                 {productDetails.colors && <span id='colours' className="flex items-center gap-2">
                   <p className='text-xl font-medium'>Colours: </p>
-                  {productDetails.colors.map(color => <span key={color} className={`block h-4 w-4 border border-black border-spacing-5 rounded-full bg-${color}-200`}></span>)}
+                  {productDetails.colors.map(color => <span key={color} className={`block h-4 w-4 border border-black border-spacing-5 rounded-full`} style={{backgroundColor: color}}></span>)}
                 </span>}
 
                 {productDetails.size && <span id="size" className='flex items-center gap-2'>

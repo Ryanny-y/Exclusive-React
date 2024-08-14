@@ -20,7 +20,7 @@ const WishlistProvider = ({ children }) => {
 
       const fetchWishlistData = async () => {
         try {
-          const response = await fetch(`http://localhost:3500/wishlist/${userData.id}`, {
+          const response = await fetch(`https://exclusive-api.onrender.com/wishlist/${userData.id}`, {
             method: 'GET',
             headers: {
               'Content-type': 'application/json',
@@ -65,7 +65,7 @@ const WishlistProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3500/wishlist', {
+      const response = await fetch('https://exclusive-api.onrender.com/wishlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const WishlistProvider = ({ children }) => {
   //* DELETE FROM WISHLIST
   const removeFromWishlist = async (productId) => {
     try {
-      const response = await fetch('http://localhost:3500/wishlist', {
+      const response = await fetch('https://exclusive-api.onrender.com/wishlist', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

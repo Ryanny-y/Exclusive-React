@@ -11,7 +11,7 @@ export default function Login() {
   useScrollToTop();
 
   const navigate = useNavigate();
-  const loginUrl = 'http://localhost:3500/auth';
+  const loginUrl = 'https://exclusive-api.onrender.com/auth';
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');

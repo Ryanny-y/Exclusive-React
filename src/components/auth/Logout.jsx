@@ -9,7 +9,7 @@ export default function Logout() {
   useEffect(() => {
     const logoutUser = async () => {
       try {
-        const response = await fetch('http://localhost:3500/logout', {
+        const response = await fetch('https://exclusive-api.onrender.com/logout', {
           method: 'GET',
           credentials: 'include'
         });
