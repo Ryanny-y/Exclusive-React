@@ -39,7 +39,7 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
   const changeQuantity = (e) => {
     const value = e.target.value;
 
-    if(!isNaN(value) && value >= 0) {
+    if(!isNaN(Number(value)) && Number(value) >= 0) {
       setProductQuantity(e.target.value);
     }
   };
@@ -74,9 +74,19 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
       <h1 className="justify-self-center">${discountedPrice}</h1>
 
       <div className="quantity justify-self-center h-7 text-center w-12 relative">
-        <input ref={inputRef} type="text" value={productQuantity < 10 ? `0${productQuantity}` : productQuantity} className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" onChange={(e) => changeQuantity(e)} onKeyDown={(e) => verifyChangeQuantity(e)}/>
+        <input 
+          ref={inputRef} 
+          type="text" 
+          value={productQuantity} 
+          className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" 
+          onChange={(e) => changeQuantity(e)} 
+          onKeyDown={(e) => verifyChangeQuantity(e)}z
+        />
+
         <button className="absolute top-1 right-2" style={{fontSize:'8px'}} onClick={() => incrementQuantity()}><FontAwesomeIcon icon={faChevronUp}/></button>
+        
         <button className="absolute bottom-1 right-2" style={{fontSize:'8px'}} onClick={() => decrementQuantity()}><FontAwesomeIcon icon={faChevronDown}/></button>
+
       </div>
 
       <h1 className="justify-self-end">${subtotal}</h1>

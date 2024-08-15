@@ -7,49 +7,18 @@ import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
 import useRedirect from "../../utils/hooks/useRedirect";
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
-import { getDiscountedPrice } from "../../utils/currency";
+import useFindMatchingProduct from "../../utils/hooks/useFindMatchingProduct";
 
 export default function Cart() {
   useScrollToTop();
   
   // context
   const { isAuthenticated } = useContext(AuthContext);
-  const { products } = useContext(ProductContext);
+  const { updateCartQuantity } = useContext(CartContext)
 
   // const items
-  const [ productDetails, setProductDetails ] = useState([]);
-  const { cartItems, updateCartQuantity } = useContext(CartContext);
-  const [ subtotal, setSubtotal ] = useState(0);
-  const [ shippingFee, setShippingFee ] = useState(0);
-  const [ total, setTotal ] = useState(0)
+  const { productDetails, subtotal, shippingFee, total } = useFindMatchingProduct();
   useRedirect(isAuthenticated, '/Exclusive-React/login');
-  
-  //* EFFECT TO FIND THE MATCHING PRODUCT OF THE CART ITEMS AND STORE IN PRODUCT DETAILS
-  useEffect(() => {
-    const matchingProducts = cartItems.map(item => {
-      const match = products.find(product => product._id === item.productId);
-      return { ...match, ...item};
-    });
-
-    setProductDetails(matchingProducts);
-
-    // CALCULATE THE CART TOTAL OF THE PRODUCTS
-    const subtotal = matchingProducts.reduce((acc, cur) => acc + (getDiscountedPrice(cur.price, cur?.discount) * cur.quantity), 0);
-    setSubtotal(subtotal);
-    if(subtotal < 140) {
-      setShippingFee(prev => {
-        const newShipping = 99;
-        setTotal(subtotal + newShipping);
-        return newShipping;
-      });
-    } else {
-      setShippingFee(prev => {
-        const newShipping = 0;
-        setTotal(subtotal + newShipping);
-        return newShipping;
-      });
-    }
-  }, [cartItems])
 
   const handleQuantityChange = (productId, quantity) => {
     updateCartQuantity(productId, quantity)
@@ -91,7 +60,7 @@ export default function Cart() {
             <p className="flex items-center justify-between"><span>Subtotal:</span> ${subtotal}</p>
 
             <hr className="h-0.5 bg-dark" />
-            <p className="flex items-center justify-between"><span>Shipping:</span> {shippingFee ? `$${shippingFee}`: 'FREE'}</p>
+            <p className="flex items-center justify-between"><span>Shipping:</span> {shippingFee ? `$${shippingFee}` : 'FREE'}</p>
 
             <hr className="h-0.5 bg-dark" />
             <p className="flex items-center justify-between"><span>Total:</span> ${total}</p>
