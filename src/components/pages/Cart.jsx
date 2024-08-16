@@ -18,7 +18,7 @@ export default function Cart() {
 
   // const items
   const { productDetails, subtotal, shippingFee, total } = useFindMatchingProduct();
-  useRedirect(isAuthenticated, '/Exclusive-React/login');
+  useRedirect();
 
   const handleQuantityChange = (productId, quantity) => {
     updateCartQuantity(productId, quantity)

@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Login() {
 
@@ -98,6 +98,11 @@ export default function Login() {
               <button type="button" className=" text-primaryRed hover:text-black duration-200 w-full py-4">Forgot Password? </button>
             </div>
           </form>
+
+          <p className="flex items-center justify-center gap-3 text-secondaryGray">
+            <span>Don't have an account?</span>
+            <Link to='/Exclusive-React/signup' className="font-semibold underline underline-offset-4 h-text-red">Sign up</Link>
+          </p>
         </section>
       </div>
       <div className="side-img absolute top-0 left-0 h-full -z-10 right-0 sm:right-1/3 lg:right-1/2">

@@ -1,6 +1,5 @@
 import WishlistContainer from "../layouts/WishlistContainer";
 import useRedirect from '../../utils/hooks/useRedirect';
-import { AuthContext } from "../../context/AuthContext";
 import useScrollToTop from '../../utils/hooks/useScrollToTop'
 import { useState, useContext, useEffect } from 'react';
 import { WishlistContext } from '../../context/WishlistContext';
@@ -8,9 +7,7 @@ import { ProductContext } from '../../context/ProductContext'
 
 export default function Wishlist() {
   useScrollToTop();
-  const { isAuthenticated } = useContext(AuthContext);
-  useRedirect(isAuthenticated, '/Exclusive-React/login');
-
+  useRedirect();
 
   // WISHLIST PRODUCTS
   const { wishlistItems } = useContext(WishlistContext);

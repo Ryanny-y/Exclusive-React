@@ -1,20 +1,37 @@
 import SmallHeader from '../ui/SmallHeader'
 import useFindMatchingProduct from '../../utils/hooks/useFindMatchingProduct';
 import useScrollToTop from '../../utils/hooks/useScrollToTop'
+import useRedirect from '../../utils/hooks/useRedirect';
+import { useState } from 'react';
 
 export default function Checkout() {
-  
+
+  useRedirect();
+
   const { productDetails, subtotal, shippingFee, total } = useFindMatchingProduct();
+  const [ firstname, setFirstname ] = useState('');
+  const [ lastname, setLastname ] = useState('');
+  const [ address, setAddress ] = useState('');
+  const [ houseNumber, setHouseNumber ] = useState('');
+  const [ townCity, setTownCity ] = useState('');
+  const [ phoneNumber, setPhoneNumber ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ saveInfo, setSaveInfo ] = useState(false);
+  const [ selectedOption, setSelectedOption ] = useState('bank');
 
   useScrollToTop();
-  const headers = ['Home', 'Checkout']
+  const headers = ['Home', 'Checkout'];
+
+  const valueSetter = (setter, value) => {
+    setter(value);
+  }
 
   return (
     <main className="checkout pt-20 pb-28">
       <div className="container mx-auto flex flex-col gap-20">
         <SmallHeader headers={headers}/>
 
-        <section className="biliing-section flex flex-col-reverse sm:flex-row justify-between gap-20">
+        <section className="biliing-section flex flex-col sm:flex-row justify-between gap-20">
           <aside className="billing basis-80 flex-grow">
             <h1 className='font-bold text-3xl tracking-wide mb-12'>Billing Details</h1>
             <form 
@@ -24,41 +41,108 @@ export default function Checkout() {
                   alert('Please Log in and Add items to cart');
                   return;
                 }
+                console.log(firstname, lastname, address, houseNumber, townCity,phoneNumber, email);
               }}
               id='billing-form' 
               className='flex flex-col gap-8 w-full'
             >
               <label htmlFor="first-name">
                 <p className='font-medium text-secondaryGray mb-2'>First Name</p>
-                <input type="text" required name="first-name" id="first-name" className='bg-secondaryLight p-2 outline-none w-full'/>
+
+                <input 
+                  type="text" 
+                  value={firstname}
+                  onChange={(e) => valueSetter(setFirstname, e.target.value)}
+                  required 
+                  name="first-name" 
+                  id="first-name" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
+              
               <label htmlFor="last-name">
                 <p className='font-medium text-secondaryGray mb-2'>Last Name</p>
-                <input type="text" required name="last-name" id="last-name" className='bg-secondaryLight p-2 outline-none w-full'/>
+                <input 
+                  type="text" 
+                  value={lastname}
+                  onChange={(e) => valueSetter(setLastname, e.target.value)}
+                  required 
+                  name="last-name" 
+                  id="last-name" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
+
               <label htmlFor="street-address">
                 <p className='font-medium text-secondaryGray mb-2'>Street Address</p>
-                <input type="text" required name="street-address" id="street-address" className='bg-secondaryLight p-2 outline-none w-full'/>
+                <input 
+                  type="text" 
+                  value={address}
+                  onChange={(e) => valueSetter(setAddress, e.target.value)}
+                  required 
+                  name="street-address" 
+                  id="street-address" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
-              <label htmlFor="houst-number">
+
+              <label htmlFor="house-number">
                 <p className='font-medium text-secondaryGray mb-2'>Apartment, floor, etc. (optional)</p>
-                <input type="text" name="houst-number" id="houst-number" className='bg-secondaryLight p-2 outline-none w-full'/>
+                <input 
+                  type="text" 
+                  value={houseNumber}
+                  onChange={(e) => valueSetter(setHouseNumber, e.target.value)}
+                  name="house-number" 
+                  id="house-number" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
+
               <label htmlFor="town-city">
                 <p className='font-medium text-secondaryGray mb-2'>Town/City</p>
-                <input type="text" required name="town-city" id="town-city" className='bg-secondaryLight p-2 outline-none w-full'/>
+                <input 
+                  type="text" 
+                  value={townCity}
+                  onChange={(e) => valueSetter(setTownCity, e.target.value)}
+                  required 
+                  name="town-city" 
+                  id="town-city" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
               <label htmlFor="phone-number">
                 <p className='font-medium text-secondaryGray mb-2'>Phone Number</p>
-                <input type="tel" required name="phone-number" id="phone-number" className='bg-secondaryLight p-2 outline-none w-full'/>
+                <input 
+                  type="tel" 
+                  value={phoneNumber}
+                  onChange={(e) => valueSetter(setPhoneNumber, e.target.value)}
+                  required 
+                  name="phone-number" 
+                  id="phone-number" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
               <label htmlFor="email-address">
                 <p className='font-medium text-secondaryGray mb-2'>Email Address</p>
-                <input type="email" required name="email-address" id="email-address" className='bg-secondaryLight p-2 outline-none w-full'/>
+                <input 
+                  type="email" 
+                  value={email}
+                  onChange={(e) => valueSetter(setEmail, e.target.value)}
+                  required 
+                  name="email-address" 
+                  id="email-address" 
+                  className='bg-secondaryLight p-2 outline-none w-full'
+                />
               </label>
               <label htmlFor="save-info" className='flex items-center gap-3'>
-                <input type="checkbox" name="save-info" id="save-info"/>
-                <p>Save this information for faster check-out next time</p>
+                <input 
+                  type="checkbox" 
+                  checked={saveInfo}
+                  onChange={() => setSaveInfo(prev => !prev)}
+                  name="save-info" 
+                  id="save-info"
+                />
+                <p className='text-sm'>Save this information for faster check-out next time</p>
               </label>
             </form>
           </aside>
@@ -68,7 +152,7 @@ export default function Checkout() {
             {productDetails.length 
             ? <div className="product-container flex flex-col gap-8 w-full">
               {productDetails.map(product => (
-                <div className='flex items-center justify-start gap-6 font-medium'>
+                <div key={product._id} className='flex items-center justify-start gap-6 font-medium'>
                   <img src={`https://exclusive-api.onrender.com/image/${product.images[0]}`} alt="Product img" className='h-10 w-10' />
                   <p>{product.name}</p>
                   <p className='ml-auto'>${product.price}</p>
@@ -84,12 +168,12 @@ export default function Checkout() {
                 <span>Subtotal: </span>
                 <span>${subtotal}</span>
               </p>
-              <line className='h-0.5 w-full bg-primaryGray'></line>
+              <hr className='h-0.5 w-full bg-primaryGray' />
               <p className='flex justify-between' >
                 <span>Shipping: </span>
                 <span>{shippingFee ? '$99' : 'FREE'}</span>
               </p>
-              <line className='h-0.5 w-full bg-primaryGray'></line>
+              <hr className='h-0.5 w-full bg-primaryGray' />
               <p className='flex justify-between' >
                 <span>Total: </span>
                 <span>${total}</span>
@@ -99,7 +183,16 @@ export default function Checkout() {
             {/* PAYMENT OPTION */}
             <div className='payment-options flex flex-col gap-4 font-medium'>
               <div className="bank flex items-center gap-2">
-                <input type="radio" name='payment-option' value='bank' id='bank' className='accent-primaryRed h-4 w-4'/>
+                <input 
+                  type="radio"
+                  required
+                  checked={selectedOption == 'bank'}
+                  name='payment-option'
+                  value='bank'
+                  onChange={() => setSelectedOption('bank')}
+                  id='bank' 
+                  className='accent-primaryRed h-4 w-4'
+                />
                 <label htmlFor="bank">Bank</label>
                 <span className="flex gap-2 items-center ml-auto">
                   <img src="images/logo/Bkash.png" alt="Bank image" className='h-6 w-10'/>
@@ -109,13 +202,26 @@ export default function Checkout() {
                 </span>
               </div>
               <div className="c-o-d flex items-center gap-2">
-                <input type="radio" name='payment-option' value='cod' id='cod' className='accent-primaryRed h-4 w-4'/>
+                <input 
+                  type="radio"
+                  required
+                  name='payment-option' 
+                  value='cod'
+                  onChange={() => setSelectedOption('cod')}
+                  id='cod' 
+                  className='accent-primaryRed h-4 w-4'
+                />
                 <label htmlFor="cod">Cash on delivery</label>
               </div>
 
               {/* COUPON */}
               <div className="coupon flex gap-5">
-                <input type="text" name="coupon-input" id="coupon-input" className="py-3 px-4 border-2 border-secondaryGray rounded-md outline-none text-sm flex-grow basis-1/2" placeholder='Coupon Code'/>
+                <input 
+                  type="text" 
+                  name="coupon-input"
+                  id="coupon-input" 
+                  className="py-3 px-4 border-2 border-secondaryGray rounded-md outline-none text-sm flex-grow basis-1/2" placeholder='Coupon Code'
+                />
                 <button className="apply-coupon bg-primaryRed text-white px-4 py-3 font-semibold flex-grow rounded-md">Apply Coupon</button>
               </div>
 

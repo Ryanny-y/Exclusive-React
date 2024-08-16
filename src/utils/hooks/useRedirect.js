@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../context/AuthContext";
 
-const useRedirect = ( isAuthenticated, path ) => {
+const useRedirect = () => {
+
+  const { isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
   
   useEffect(() => {
     if(!isAuthenticated) {
-      navigate(path);
+      navigate('/Exclusive-React/login');
       return;
     }
-  }, [ isAuthenticated, path ])
+  }, [ isAuthenticated ])
 
 };
 

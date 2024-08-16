@@ -80,7 +80,7 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
           value={productQuantity} 
           className="text-start w-full outline-none py-1 px-2 text-sm  border border-secondaryGray rounded-md" 
           onChange={(e) => changeQuantity(e)} 
-          onKeyDown={(e) => verifyChangeQuantity(e)}z
+          onKeyDown={(e) => verifyChangeQuantity(e)}
         />
 
         <button className="absolute top-1 right-2" style={{fontSize:'8px'}} onClick={() => incrementQuantity()}><FontAwesomeIcon icon={faChevronUp}/></button>

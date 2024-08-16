@@ -31,11 +31,11 @@ export default function Footer() {
 
         <div id="account" className="flex flex-col gap-4 shrink-0 grow md:grow-0">
           <h1 className="font-medium">My Account</h1>
-          <a href='/Exclusive-React/' className="h-text-red">Account</a>
-          <a href='login' className="h-text-red">Login / Register</a>
-          <a href='cart' className="h-text-red">Cart</a>
-          <a href='wishlist' className="h-text-red">Wishlist</a>
-          <a href='/Exclusive-React/' className="h-text-red">Shop</a>
+          <Link to='/Exclusive-React/' className="h-text-red">Account</Link>
+          <Link to='login' className="h-text-red">Login / Register</Link>
+          <Link to='cart' className="h-text-red">Cart</Link>
+          <Link to='wishlist' className="h-text-red">Wishlist</Link>
+          <Link to='/Exclusive-React/' className="h-text-red">Shop</Link>
         </div>
 
         <div id="quick-link" className="flex flex-col gap-4 md:basis-40 grow md:grow-0">
@@ -43,7 +43,7 @@ export default function Footer() {
           <a href='/Exclusive-React/' className="h-text-red">Privacy Policy</a>
           <a href='/Exclusive-React/' className="h-text-red">Term Of Use</a>
           <a href='/Exclusive-React/' className="h-text-red">FAQ</a>
-          <a href='contact' className="h-text-red">Contact</a>
+          <Link to='contact' className="h-text-red">Contact</Link>
         </div>
 
         <div id="download" className="flex flex-col gap-4 basis-52 grow-0">
