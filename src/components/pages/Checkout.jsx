@@ -3,6 +3,7 @@ import useFindMatchingProduct from '../../utils/hooks/useFindMatchingProduct';
 import useScrollToTop from '../../utils/hooks/useScrollToTop'
 import useRedirect from '../../utils/hooks/useRedirect';
 import { useState } from 'react';
+import { getDiscountedPrice } from '../../utils/currency';
 
 export default function Checkout() {
 
@@ -41,7 +42,6 @@ export default function Checkout() {
                   alert('Please Log in and Add items to cart');
                   return;
                 }
-                console.log(firstname, lastname, address, houseNumber, townCity,phoneNumber, email);
               }}
               id='billing-form' 
               className='flex flex-col gap-8 w-full'
@@ -155,7 +155,7 @@ export default function Checkout() {
                 <div key={product._id} className='flex items-center justify-start gap-6 font-medium'>
                   <img src={`https://exclusive-api.onrender.com/image/${product.images[0]}`} alt="Product img" className='h-10 w-10' />
                   <p>{product.name}</p>
-                  <p className='ml-auto'>${product.price}</p>
+                  <p className='ml-auto'>${(getDiscountedPrice(product.price, product.discount)) * product.quantity}</p>
                 </div>
               ))}
               </div> :
