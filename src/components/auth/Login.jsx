@@ -2,6 +2,7 @@ import { useState, useContext } from "react"
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from 'react-router-dom'
+import { ProductContext } from "../../context/ProductContext";
 
 export default function Login() {
 
@@ -12,6 +13,7 @@ export default function Login() {
 
   const navigate = useNavigate();
   const loginUrl = 'https://exclusive-api.onrender.com/auth';
+  const { setShowPopUp } = useContext(ProductContext)
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -20,7 +22,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if(!username || !password) {
-      console.log('username and password are required');
+      setShowPopUp('Username and Password are required');
       return
     };
 
@@ -52,7 +54,7 @@ export default function Login() {
       setIsAuthenticated(true);
       navigate('/Exclusive-React/')
     } catch (error) {
-      console.log(error.message);
+      setShowPopUp(error.message);
     }
   }
 

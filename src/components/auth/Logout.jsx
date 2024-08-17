@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom"; // Use for navigation
+import { ProductContext } from "../../context/ProductContext";
 
 export default function Logout() {
   const { setUserData, setAccessToken, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { setShowPopUp } = useContext(ProductContext)
 
   useEffect(() => {
     const logoutUser = async () => {
@@ -23,7 +25,7 @@ export default function Logout() {
         setIsAuthenticated(false);
         navigate('/Exclusive-React/login');
       } catch (error) {
-        console.error(error);
+        setShowPopUp(error.message);
       }
     };
 

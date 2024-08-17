@@ -1,12 +1,16 @@
 import { useEffect, createContext, useState, useContext } from "react";
 import { AuthContext } from './/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { ProductContext } from "./ProductContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export const WishlistContext = createContext({});
 
 const WishlistProvider = ({ children }) => {
 
   const { userData, isAuthenticated, accessToken } = useContext(AuthContext);
+  const { setShowPopUp } = useContext(ProductContext);
   const [ wishlistDetails, setWishlistDetails ] = useState({});
   const [ wishlistItems, setWishlistItems ] = useState([]);
   const [ wishlistChange, setWishlistChange ] = useState(false);
@@ -43,7 +47,7 @@ const WishlistProvider = ({ children }) => {
           }
         } catch (error) {
           if(isMounted) {
-            console.log(error.message);
+            setShowPopUp(`Fetch Error: ${error.message}`);
           }
         }
       }
@@ -85,9 +89,9 @@ const WishlistProvider = ({ children }) => {
       
       const data = await response.json();
       setWishlistChange(prev => !prev);
-      console.log(data)
+      setShowPopUp(`Added To Wishlist`)
     } catch (error) {
-      console.log(error.message)
+      setShowPopUp(`Something Went Wrong: ${error.message}`);
     }
   };
 
@@ -112,15 +116,15 @@ const WishlistProvider = ({ children }) => {
         throw new Error(errMsg)
       }
       const data = await response.json();
-      setWishlistChange(prev => !prev)
-      console.log(data);
+      setWishlistChange(prev => !prev);
+      setShowPopUp(`Product Removed`);
     } catch (error) {
-      console.log(error.message)
+      setShowPopUp(`Something went wrong: ${error.message}`);
     }
   };
 
   const value = {
-    wishlistDetails, wishlistItems, addToWishlist, removeFromWishlist
+    wishlistDetails, wishlistItems, addToWishlist, removeFromWishlist,
   }
 
   return (

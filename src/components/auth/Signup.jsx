@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
+import { ProductContext } from '../../context/ProductContext';
 
 export default function Signup() {
 
   const navigate = useNavigate();
+  const { setShowPopUp } = useContext(ProductContext);
   useScrollToTop();
 
   const [ name, setName ] = useState('');
@@ -14,7 +16,7 @@ export default function Signup() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     if(!name || !username || !password) {
-      console.error('All field are required!');
+      setShowPopUp('All field are required!');
       return;
     };
     
@@ -39,10 +41,10 @@ export default function Signup() {
       }
       
       await response.json();
-      
+      setShowPopUp('Sign Up Successful')
       navigate('/Exclusive-React/login')
     } catch (error) {
-      console.log(error.message);
+      setShowPopUp(error.message);
     }
   };
 

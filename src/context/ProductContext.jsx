@@ -9,7 +9,9 @@ const ProductProvider = ({ children }) => {
 
   const [ products, setProducts ] = useState([]);
   const [ searchProduct, setSearchProduct ] = useState('');
-  const [ loaded, setLoaded ] = useState(false)
+  const [ loaded, setLoaded ] = useState(false);
+  
+  const [ showPopUp, setShowPopUp ] = useState('');
   
   const { data, error, isLoading } = useFetchData(productsUrl);
   useEffect(() => {
@@ -21,7 +23,8 @@ const ProductProvider = ({ children }) => {
 
   const contextValue = {
     products, setProducts,
-    searchProduct, setSearchProduct
+    searchProduct, setSearchProduct,
+    showPopUp, setShowPopUp
   };
 
   return (

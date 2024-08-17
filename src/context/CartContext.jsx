@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ProductContext } from "./ProductContext";
 
 export const CartContext = createContext({});
 
@@ -8,6 +9,7 @@ export default function CartProvider({children}) {
 
   const navigate = useNavigate();
   const { userData, isAuthenticated, accessToken } = useContext(AuthContext);
+  const { setShowPopUp } = useContext(ProductContext);
   const [ cartDetails, setCartDetails ] = useState({});
   const [ cartItems, setCartItems ] = useState([]);
   const [ cartChanged, setCartChanged ] = useState(false);
@@ -40,7 +42,7 @@ export default function CartProvider({children}) {
           }
         } catch (error) {
           if(isMounted) {
-            console.log('Fetch error:', error.message);
+            setShowPopUp(`Fetch error: ${error.message}`);
           }
         }
       };
@@ -86,12 +88,10 @@ export default function CartProvider({children}) {
       const data = await response.json();
       setCartChanged(prev => !prev)
 
-      // change to actual added
-      console.log(productId)
-      console.log(data);
+      setShowPopUp('Added To Cart')
       
     } catch (error) {
-      console.log(error.message);
+      setShowPopUp(`Fetch error: ${error.message}`);
     }
   }
 
@@ -119,11 +119,11 @@ export default function CartProvider({children}) {
       }
 
       const data = await response.json();
-      console.log(data);
 
       setCartChanged(prev => !prev)
+      setShowPopUp('Cart Updated Successfully')
     } catch (error) {
-      console.log(error.message)
+      setShowPopUp(`Fetch error: ${error.message}`);
     }
   }
 
@@ -149,11 +149,11 @@ export default function CartProvider({children}) {
       }
 
       const data = await response.json();
-      console.log(data);
 
       setCartChanged(prev => !prev)
+      setShowPopUp('Product Removed')
     } catch (error) {
-      console.log(error.message)
+      setShowPopUp(`Fetch error: ${error.message}`);
     }
   };
 
