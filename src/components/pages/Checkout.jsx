@@ -2,14 +2,17 @@ import SmallHeader from '../ui/SmallHeader'
 import useFindMatchingProduct from '../../utils/hooks/useFindMatchingProduct';
 import useScrollToTop from '../../utils/hooks/useScrollToTop'
 import useRedirect from '../../utils/hooks/useRedirect';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { getDiscountedPrice } from '../../utils/currency';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Checkout() {
 
   useRedirect();
 
   const { productDetails, subtotal, shippingFee, total } = useFindMatchingProduct();
+  const { userData, accessToken } = useContext(AuthContext); 
+
   const [ firstname, setFirstname ] = useState('');
   const [ lastname, setLastname ] = useState('');
   const [ address, setAddress ] = useState('');
@@ -27,6 +30,48 @@ export default function Checkout() {
     setter(value);
   }
 
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    if(!productDetails.length) {
+      alert('Please Log in and Add items to cart');
+      return;
+    };
+
+    try {
+      const orderItems = productDetails.map(product => {
+        return { productId: product.productId, quantity: product.quantity, subtotal: (getDiscountedPrice(product.price, product.discount) * product.quantity)};
+      })
+      const response = await fetch('https://exclusive-api.onrender.com/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          userId: userData?.id,
+          order_items: orderItems,
+          subtotal,
+          shipping_fee: shippingFee,
+          total,
+          payment_method: selectedOption
+        }),
+        credentials: 'include'
+      });
+      
+      if(!response.ok) {
+        const errData = await response.json();
+        const errMsg = errData.message || errData.statusText;
+        throw new Error(errMsg)
+      }
+      
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <main className="checkout pt-20 pb-28">
       <div className="container mx-auto flex flex-col gap-20">
@@ -36,13 +81,7 @@ export default function Checkout() {
           <aside className="billing basis-80 flex-grow">
             <h1 className='font-bold text-3xl tracking-wide mb-12'>Billing Details</h1>
             <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                if(!productDetails.length) {
-                  alert('Please Log in and Add items to cart');
-                  return;
-                }
-              }}
+              onSubmit={handleCheckout}
               id='billing-form' 
               className='flex flex-col gap-8 w-full'
             >
@@ -222,10 +261,10 @@ export default function Checkout() {
                   id="coupon-input" 
                   className="py-3 px-4 border-2 border-secondaryGray rounded-md outline-none text-sm flex-grow basis-1/2" placeholder='Coupon Code'
                 />
-                <button className="apply-coupon bg-primaryRed text-white px-4 py-3 font-semibold flex-grow rounded-md">Apply Coupon</button>
+                <button className="apply-coupon bg-primaryRed text-white px-4 py-3 font-semibold flex-grow rounded-md h-bg-red">Apply Coupon</button>
               </div>
 
-              <button type='submit' form='billing-form' className="apply-coupon bg-primaryRed text-white px-12 py-3 font-semibold self-start rounded-sm">Place Order</button>
+              <button type='submit' form='billing-form' className="apply-coupon bg-primaryRed text-white px-12 py-3 font-semibold self-start rounded-sm h-bg-red">Place Order</button>
             </div>
           </div>
         </section>
