@@ -29,7 +29,7 @@ const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider value={contextValue}>
-      {loaded ? children : <div>loading...</div>}
+      {loaded ? children : <div className="container font-bold text-5xl sm:text-7xl h-96 text-center flex items-center justify-center">LOADING...</div>}
     </ProductContext.Provider>
   );
 };
