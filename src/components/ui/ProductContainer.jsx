@@ -2,32 +2,55 @@ import WishlistBtn from "./buttons/WishlistBtn";
 import ViewProductBtn from "./buttons/ViewProductBtn";
 import AddToCartBtn from "./buttons/AddToCartBtn.jsx";
 import DeleteBtn from "./buttons/DeleteBtn.jsx";
-import { getDiscountedPrice } from '../../utils/currency.js'
+import { getDiscountedPrice } from "../../utils/currency.js";
 import { useState } from "react";
 
-export default function ProductContainer({productDetails, isWishlist = false, isJfy = false, isDetailed = false}) {
-  const ratingImgSrc = `${isDetailed ? `../` : ''}images/ratings/rating-${productDetails.ratings.stars * 10}.png`
+export default function ProductContainer({
+  productDetails,
+  isWishlist = false,
+  isJfy = false,
+  isDetailed = false,
+}) {
+  const ratingImgSrc = `${isDetailed ? `../` : ""}images/ratings/rating-${
+    productDetails.ratings.stars * 10
+  }.png`;
 
-  const [ hovered, setHovered ] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div className="product-container flex flex-col gap-4 rounded-sm">
-      <div className="product-image p-10 bg-secondaryLight rounded-sm flex justify-center relative overflow-hidden"
-      onMouseEnter={() => setHovered(c => !c)} onMouseLeave={() => setHovered(c => !c)}>
-        <WishlistBtn productId={productDetails._id} isWishlist={isWishlist}/>
-        <ViewProductBtn productId={productDetails._id} isWishlist={isWishlist}/>
-        {!productDetails.discount || productDetails.discount > 0 && 
-          <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">-{productDetails.discount * 100}%</p>
-        }
-        {isWishlist && <DeleteBtn productId={productDetails._id} isWishlist={isWishlist} isJfy={isJfy}/>}
+      <div
+        className="product-image p-10 bg-secondaryLight rounded-sm flex justify-center relative overflow-hidden"
+        onMouseEnter={() => setHovered((c) => !c)}
+        onMouseLeave={() => setHovered((c) => !c)}
+      >
+        <WishlistBtn productId={productDetails._id} isWishlist={isWishlist} />
+        <ViewProductBtn
+          productId={productDetails._id}
+          isWishlist={isWishlist}
+        />
+        {!productDetails.discount ||
+          (productDetails.discount > 0 && (
+            <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">
+              -{productDetails.discount * 100}%
+            </p>
+          ))}
+        {isWishlist && (
+          <DeleteBtn
+            productId={productDetails._id}
+            isWishlist={isWishlist}
+            isJfy={isJfy}
+          />
+        )}
 
-        <img 
-          src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`} 
-          alt="product image" 
+        <img
+          src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`}
+          alt="product image"
           style={{
-            width: '100%',
-            maxWidth: '172px',
-            height: '152px'
+            width: "100%",
+            maxWidth: "172px",
+            height: "152px",
+            backgroundSize: "cover",
           }}
         />
 
@@ -37,16 +60,19 @@ export default function ProductContainer({productDetails, isWishlist = false, is
         <h1>{productDetails.name}</h1>
 
         <span className="product-prices flex items-center gap-3">
-          <p className="discounted-price text-primaryRed">${getDiscountedPrice(productDetails.price, productDetails.discount)}</p>
-          <p className="discounted-price text-secondaryGray">${productDetails.price}</p>
+          <p className="discounted-price text-primaryRed">
+            ${getDiscountedPrice(productDetails.price, productDetails.discount)}
+          </p>
+          <p className="discounted-price text-secondaryGray">
+            ${productDetails.price}
+          </p>
         </span>
 
         <span className="product-rating flex items-center gap-2">
-          <img src={ratingImgSrc} alt="Rating img" className="h-5"/>
+          <img src={ratingImgSrc} alt="Rating img" className="h-5" />
           <p>({productDetails.ratings.count})</p>
         </span>
       </div>
     </div>
-  )
-
-};
+  );
+}
