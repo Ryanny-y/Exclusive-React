@@ -1,37 +1,51 @@
 import SmallHeader from "../ui/SmallHeader";
 import FilterButtons from "../ui/buttons/FilterButtons";
 import ProductContainer from "../ui/ProductContainer";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
+import { useParams } from "react-router-dom";
 
 export default function Products() {
   const { products } = useContext(ProductContext);
+  const [ filteredProducts, setFilteredProducts ] = useState(products);
+
+  const { filter = '' } = useParams();
+  console.log(filter.split('=')[1]);
+  
 
   useEffect(() => {
-    console.log(products);
-  });
+    if(filter.includes('category')) {
+      const filteredProducts = products.filter(product => 
+        product.category.some(cat => 
+          cat.toLowerCase().includes(filter.split('=')[1].toLowerCase())
+        )
+      )
+      setFilteredProducts(filteredProducts);
+    }
 
-  const categoryArr = [
+  }, [filter])
+
+  const filterArr = [
     {
-      filterBy: "Phones",
+      filterBy: "category=Phones",
     },
     {
-      filterBy: "Computers",
+      filterBy: "category=Computers",
     },
     {
-      filterBy: "SmartWatch",
+      filterBy: "category=SmartWatch",
     },
     {
-      filterBy: "Camera",
+      filterBy: "category=Camera",
     },
     {
-      filterBy: "Headphones",
+      filterBy: "category=Headphones",
     },
     {
-      filterBy: "Gaming",
+      filterBy: "category=Gaming",
     },
     {
-      filterBy: "Clothes",
+      filterBy: "category=Clothes",
     },
   ];
 
@@ -40,12 +54,12 @@ export default function Products() {
       <div className="container mx-auto flex flex-col gap-10">
         <SmallHeader headers={["Home", "Products"]} />
 
-        <div className="flex justify-between gap-10 relative">
-          <aside id="product-filters" className="flex flex-col gap-5 basis-64">
+        <div className="flex flex-col xs:flex-row justify-between gap-10 relative">
+          <aside id="product-filters" className="hidden md:flex flex-col gap-5 basis-64">
             <div className="filter-categories flex flex-col gap-5">
               <h1 className="font-semibold text-2xl">Categories</h1>
               <ul className="filter_btn_categories flex flex-col gap-1 pl-2 ">
-                {categoryArr.map((category) => (
+                {filterArr.map((category) => (
                   <li key={category.filterBy}>
                     <FilterButtons filterBy={category.filterBy} />
                   </li>
@@ -56,7 +70,7 @@ export default function Products() {
             <div className="filter-categories flex flex-col gap-5">
               <h1 className="font-semibold text-2xl">Filter By</h1>
               <ul className="filter_btn_filters flex flex-col gap-1 pl-2 ">
-                {categoryArr.map((category) => (
+                {filterArr.map((category) => (
                   <li key={category.filterBy}>
                     <FilterButtons filterBy={category.filterBy} />
                   </li>
@@ -67,10 +81,10 @@ export default function Products() {
 
           <section
             id="product-container"
-            className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7 gap-y-14 h-svh bg-blue-200 overflow-auto"
+            className="flex-1 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7 gap-y-14 h-svh overflow-auto"
           >
-            {products.map((product) => (
-              <ProductContainer key={product._id} productDetails={product} />
+            {filteredProducts.map((product) => (
+              <ProductContainer key={product._id} productDetails={product} isDetailed={filter ? true : false}/>
             ))}
           </section>
         </div>

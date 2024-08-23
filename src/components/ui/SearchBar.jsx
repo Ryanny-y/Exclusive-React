@@ -73,7 +73,7 @@ export default function SearchBar() {
             </li>
             <li className="h-text-red">
               {/* Link */}
-              <Link to='/Exclusive-React/logout'> Logout</Link>
+              <Link to='/Exclusive-React/logout'>Logout</Link>
             </li>
           </ul>
         </div>
