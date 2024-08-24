@@ -25,7 +25,7 @@ export default function Checkout() {
   const [ phoneNumber, setPhoneNumber ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ saveInfo, setSaveInfo ] = useState(false);
-  const [ selectedOption, setSelectedOption ] = useState('');
+  const [ selectedOption, setSelectedOption ] = useState('bank');
 
   useScrollToTop();
   const headers = ['Home', 'Checkout'];
