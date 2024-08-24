@@ -15,13 +15,13 @@ export default function Checkout() {
   const { userData, accessToken } = useContext(AuthContext);
   const { setShowPopUp } = useContext(ProductContext);
 
-  const [ firstname, setFirstname ] = useState('');
-  const [ lastname, setLastname ] = useState('');
-  const [ address, setAddress ] = useState('');
-  const [ houseNumber, setHouseNumber ] = useState('');
-  const [ townCity, setTownCity ] = useState('');
-  const [ phoneNumber, setPhoneNumber ] = useState('');
-  const [ email, setEmail ] = useState('');
+  const [ firstname, setFirstname ] = useState('ryanny');
+  const [ lastname, setLastname ] = useState('romero');
+  const [ address, setAddress ] = useState('address');
+  const [ houseNumber, setHouseNumber ] = useState('123');
+  const [ townCity, setTownCity ] = useState('ct');
+  const [ phoneNumber, setPhoneNumber ] = useState('dsadas');
+  const [ email, setEmail ] = useState('dasdsa@gmail.com');
   const [ saveInfo, setSaveInfo ] = useState(false);
   const [ selectedOption, setSelectedOption ] = useState('bank');
 
@@ -67,7 +67,9 @@ export default function Checkout() {
       }
       
       const data = await response.json();
-      setShowPopUp('Products Ordered!')
+      setShowPopUp('Products Ordered!');
+
+      // clear cart here
 
     } catch (error) {
       setShowPopUp(`Something went wrong: ${error.message}`)

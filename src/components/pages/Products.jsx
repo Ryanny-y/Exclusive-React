@@ -4,14 +4,15 @@ import ProductContainer from "../ui/ProductContainer";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { useParams } from "react-router-dom";
+import useScrollToTop from '../../utils/hooks/useScrollToTop';
 
 export default function Products() {
+  useScrollToTop(); 
+
   const { products } = useContext(ProductContext);
   const [ filteredProducts, setFilteredProducts ] = useState(products);
 
   const { filter = '' } = useParams();
-  console.log(filter.split('=')[1]);
-  
 
   useEffect(() => {
     if(filter.includes('category')) {

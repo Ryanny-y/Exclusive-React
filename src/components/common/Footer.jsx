@@ -35,7 +35,7 @@ export default function Footer() {
           <Link to='login' className="h-text-red">Login / Register</Link>
           <Link to='cart' className="h-text-red">Cart</Link>
           <Link to='wishlist' className="h-text-red">Wishlist</Link>
-          <Link to='/Exclusive-React/' className="h-text-red">Shop</Link>
+          <Link to='/Exclusive-React/products' className="h-text-red">Shop</Link>
         </div>
 
         <div id="quick-link" className="flex flex-col gap-4 md:basis-40 grow md:grow-0">

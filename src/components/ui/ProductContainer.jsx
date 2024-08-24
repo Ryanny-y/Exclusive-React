@@ -63,8 +63,8 @@ export default function ProductContainer({
           <p className="discounted-price text-primaryRed">
             ${getDiscountedPrice(productDetails.price, productDetails.discount)}
           </p>
-          <p className="discounted-price text-secondaryGray">
-            ${productDetails.price}
+          <p className="product-price text-secondaryGray">
+            {(productDetails.discount || productDetails.discount !== 0) && `$${productDetails.price}`}
           </p>
         </span>
 

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Countdown from "../ui/Countdown";
 import useFetchData from "../../utils/hooks/useFetchData";
+import { Link } from "react-router-dom";
 
 
 export default function FlashSales() {
@@ -66,7 +67,7 @@ export default function FlashSales() {
           ))}
         </SectionSlider>
 
-        <button className="bg-primaryRed text-light py-4 px-12 self-center rounded-sm h-bg-red">View All Product</button>
+        <Link to='/Exclusive-React/products' className="bg-primaryRed text-light py-4 px-12 self-center rounded-sm h-bg-red">View All Product</Link>
       </SectionContainer>
   )
 
