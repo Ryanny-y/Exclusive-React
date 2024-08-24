@@ -24,7 +24,7 @@ export default function Contact() {
   }
 
   return (
-    <main className="contact py-16" data-aos="fade-up" data-aos-delay="100">
+    <main className="contact py-20 lg:py-16" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex-col gap-20">
         <SmallHeader headers={headers}/>
 

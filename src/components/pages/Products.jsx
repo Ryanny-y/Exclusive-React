@@ -51,7 +51,7 @@ export default function Products() {
   ];
 
   return (
-    <main className="products-page py-16">
+    <main className="products-page py-20">
       <div className="container mx-auto flex flex-col gap-10">
         <SmallHeader headers={["Home", "Products"]} />
 

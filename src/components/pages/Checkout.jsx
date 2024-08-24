@@ -6,6 +6,7 @@ import { useState, useContext } from 'react';
 import { getDiscountedPrice } from '../../utils/currency';
 import { AuthContext } from '../../context/AuthContext';
 import { ProductContext } from '../../context/ProductContext';
+import { CartContext } from '../../context/CartContext';
 
 export default function Checkout() {
 
@@ -13,17 +14,18 @@ export default function Checkout() {
 
   const { productDetails, subtotal, shippingFee, total } = useFindMatchingProduct();
   const { userData, accessToken } = useContext(AuthContext);
+  const { clearCart } = useContext(CartContext);
   const { setShowPopUp } = useContext(ProductContext);
 
-  const [ firstname, setFirstname ] = useState('ryanny');
-  const [ lastname, setLastname ] = useState('romero');
-  const [ address, setAddress ] = useState('address');
-  const [ houseNumber, setHouseNumber ] = useState('123');
-  const [ townCity, setTownCity ] = useState('ct');
-  const [ phoneNumber, setPhoneNumber ] = useState('dsadas');
-  const [ email, setEmail ] = useState('dasdsa@gmail.com');
+  const [ firstname, setFirstname ] = useState('');
+  const [ lastname, setLastname ] = useState('');
+  const [ address, setAddress ] = useState('');
+  const [ houseNumber, setHouseNumber ] = useState('');
+  const [ townCity, setTownCity ] = useState('');
+  const [ phoneNumber, setPhoneNumber ] = useState('');
+  const [ email, setEmail ] = useState('');
   const [ saveInfo, setSaveInfo ] = useState(false);
-  const [ selectedOption, setSelectedOption ] = useState('bank');
+  const [ selectedOption, setSelectedOption ] = useState('');
 
   useScrollToTop();
   const headers = ['Home', 'Checkout'];
@@ -35,7 +37,7 @@ export default function Checkout() {
   const handleCheckout = async (e) => {
     e.preventDefault();
     if(!productDetails.length) {
-      alert('Please Log in and Add items to cart');
+      setShowPopUp('Cart is empty!');
       return;
     };
 
@@ -70,6 +72,7 @@ export default function Checkout() {
       setShowPopUp('Products Ordered!');
 
       // clear cart here
+      clearCart();
 
     } catch (error) {
       setShowPopUp(`Something went wrong: ${error.message}`)

@@ -12,7 +12,7 @@ export default function Home() {
 
   // gap-34
   return (
-    <main className="py-10 flex flex-col gap-32" >
+    <main className="py-20 lg:pt-14 flex flex-col gap-32" >
       <Hero />
       <FlashSales />
       <Category />

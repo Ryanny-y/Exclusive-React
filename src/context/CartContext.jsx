@@ -157,8 +157,35 @@ export default function CartProvider({children}) {
     }
   };
 
+  const clearCart = async () => {
+    try {
+      const response = await fetch('https://exclusive-api.onrender.com/cart/clear', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          userId: userData.id
+        }),
+        credentials: 'include'
+      })
+      
+      if(!response.ok) {
+        const errData = await response.json();
+        const errMsg = errData.message || errData.statusText;
+        throw new Error(errMsg);
+      }
+
+      const data = await response.json();
+      setCartChanged(prev => !prev)
+    } catch (error) {
+      setShowPopUp(`Fetch error: ${error.message}`);
+    }
+  }
+
   const value = {
-    cartDetails, cartItems, addToCart, updateCartQuantity, deleteFromCart
+    cartDetails, cartItems, addToCart, updateCartQuantity, deleteFromCart, clearCart
   }
 
   return (
