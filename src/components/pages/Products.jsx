@@ -27,11 +27,13 @@ export default function Products() {
   }, [filter]);
 
   useEffect(() => {
-    const filteredProducts = products.filter(product => 
-      product.name.toLowerCase().includes(searchProduct.toLowerCase()) ||
-      product.category.some(cat => cat.toLowerCase().includes(searchProduct.toLowerCase()))
-    )
-    setFilteredProducts(filteredProducts)
+    if(searchProduct) {
+      const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchProduct.toLowerCase()) ||
+        product.category.some(cat => cat.toLowerCase().includes(searchProduct.toLowerCase()))
+      )
+      setFilteredProducts(filteredProducts)
+    }
   }, [searchProduct])
 
   const filterArr = [

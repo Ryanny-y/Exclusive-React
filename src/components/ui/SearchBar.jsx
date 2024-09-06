@@ -66,7 +66,7 @@ export default function SearchBar() {
           <button className="text-base bg-primaryRed text-white w-8 h-8 rounded-full" onClick={() => setShowUserOption(cur => !cur)}><FontAwesomeIcon icon={faUser} /></button>
           <ul className={userOptionClass}>
             <li className="h-text-red">
-              <Link><FontAwesomeIcon icon={faUser} className="mr-2"/> Manage My Account</Link>
+              <Link to='/Exclusive-React/account'><FontAwesomeIcon icon={faUser} className="mr-2"/> Manage My Account</Link>
             </li>
             <li className="h-text-red">
               <Link to='/Exclusive-React/orders'> My Order</Link>

@@ -46,7 +46,7 @@ export default function Orders() {
   return (
     <main className="contact py-20 lg:py-16" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex flex-col gap-20">
-        <SmallHeader headers={['Home', 'Products']}></SmallHeader>
+        <SmallHeader headers={['Home', 'Orders']}></SmallHeader>
 
         <section id="orders-container" className='flex flex-col gap-10 w-full'>
           {orderData.orders && 
