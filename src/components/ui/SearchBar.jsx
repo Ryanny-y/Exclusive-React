@@ -3,13 +3,13 @@ import { ProductContext } from "../../context/ProductContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHeart, faUser } from '@fortawesome/free-regular-svg-icons'
-import { Link } from 'react-router-dom' 
+import { Link, useNavigate } from 'react-router-dom' 
 import { AuthContext } from "../../context/AuthContext";
 import { CartContext } from "../../context/CartContext";
 import { WishlistContext } from "../../context/WishlistContext";
 
 export default function SearchBar() {
-  const { searchProduct: searchContext, setSearchProduct } = useContext(ProductContext);
+  const { searchProduct, setSearchProduct } = useContext(ProductContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
   const { wishlistItems } = useContext(WishlistContext)
@@ -17,7 +17,8 @@ export default function SearchBar() {
   const userOptionClass = `${showUserOption ? 'block' : 'hidden'} absolute top-10 right-0 w-52 pl-5 bg-transparent pr-3 py-4 rounded-sm flex flex-col gap-2 text-white before:absolute before:blur bg-blur before:top-1 before:bottom-0 before:right-0 before:w-52 before:-z-10`
   const [ cartLength, setCartLength ] = useState(0);
   const [ wishlistLength, setWishlistLength ] = useState(0);
-
+  const navigate = useNavigate();
+  
   //* EFFECT TO CHANGE THE CART LENGTH WHENEVER THE CART CHANGED
   useEffect(() => {
     setCartLength(cartItems.length);
@@ -27,7 +28,11 @@ export default function SearchBar() {
     setWishlistLength(wishlistItems.length)
   }, [wishlistItems])
 
-  const searchProduct = searchContext || '';
+  const handleInput = (e) => {
+    if(e.key === 'Enter') {
+      navigate('/Exclusive-React/Products');
+    }
+  }
 
   return (
     <div className="flex items-center justify-end gap-5 basis-80 grow">
@@ -38,8 +43,9 @@ export default function SearchBar() {
           placeholder="What are you looking for?"
           value={searchProduct}
           onChange={(e) => setSearchProduct(e.target.value)}
+          onKeyDown={(e) => handleInput(e)}
         />
-        <FontAwesomeIcon className="absolute top-1/2 -translate-y-1/2 right-3" icon={faMagnifyingGlass} />
+        <FontAwesomeIcon className="absolute top-1/2 -translate-y-1/2 right-3" icon={faMagnifyingGlass} onClick={() => navigate('/Exclusive-React/Products')}/>
       </div>
 
       <Link to='wishlist' className="relative">

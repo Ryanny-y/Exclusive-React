@@ -9,7 +9,7 @@ import useScrollToTop from '../../utils/hooks/useScrollToTop';
 export default function Products() {
   useScrollToTop(); 
 
-  const { products } = useContext(ProductContext);
+  const { products, searchProduct } = useContext(ProductContext);
   const [ filteredProducts, setFilteredProducts ] = useState(products);
 
   const { filter = '' } = useParams();
@@ -24,7 +24,15 @@ export default function Products() {
       setFilteredProducts(filteredProducts);
     }
 
-  }, [filter])
+  }, [filter]);
+
+  useEffect(() => {
+    const filteredProducts = products.filter(product => 
+      product.name.toLowerCase().includes(searchProduct.toLowerCase()) ||
+      product.category.some(cat => cat.toLowerCase().includes(searchProduct.toLowerCase()))
+    )
+    setFilteredProducts(filteredProducts)
+  }, [searchProduct])
 
   const filterArr = [
     {
