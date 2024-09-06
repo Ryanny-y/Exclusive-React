@@ -1,9 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import SmallHeader from "../ui/SmallHeader";
 import CartProduct from "../ui/CartProduct";
 import { Link } from 'react-router-dom';
-import { AuthContext } from "../../context/AuthContext";
-import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
 import useRedirect from "../../utils/hooks/useRedirect";
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
@@ -13,7 +11,6 @@ export default function Cart() {
   useScrollToTop();
   
   // context
-  const { isAuthenticated } = useContext(AuthContext);
   const { updateCartQuantity } = useContext(CartContext)
 
   // const items

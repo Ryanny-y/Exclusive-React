@@ -63,7 +63,7 @@ export default function SearchBar() {
               <Link><FontAwesomeIcon icon={faUser} className="mr-2"/> Manage My Account</Link>
             </li>
             <li className="h-text-red">
-              <Link> My Order</Link>
+              <Link to='/Exclusive-React/orders'> My Order</Link>
             </li>
             <li className="h-text-red">
               <Link> My Cancellations</Link>

@@ -13,6 +13,7 @@ import Logout from "./components/auth/Logout.jsx";
 import Checkout from "./components/pages/Checkout.jsx";
 import ProductDetails from "./components/pages/ProductDetails.jsx";
 import Products from "./components/pages/Products.jsx";
+import Orders from "./components/pages/Orders.jsx";
 import "./index.css";
 import "./styles/sliderStyles.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "product/:productId",
         element: <ProductDetails />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />
       },
       {
         path: "login",
