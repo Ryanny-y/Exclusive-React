@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import SectionContainer from "../layouts/SectionContainer";
 import SectionHeader from "../ui/SectionHeader";
 import SectionSlider from "../ui/sliders/SectionSlider";
@@ -6,24 +6,18 @@ import ProductContainer from "../ui/ProductContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Countdown from "../ui/Countdown";
-import useFetchData from "../../utils/hooks/useFetchData";
 import { Link } from "react-router-dom";
+import { ProductContext } from "../../context/ProductContext";
 
 
 export default function FlashSales() {
   const [ productDetails, setProductDetails ] = useState([]);
 
-  const url = 'https://exclusive-api.onrender.com/products'
-
-  const { data, error, isLoading } = useFetchData(url);
-
-  useEffect(() => {
-    if (!error && !isLoading && data.length) {
-      const filteredProducts = data.filter(product => product.discount);
-      setProductDetails(filteredProducts);
-      
-    }
-  }, [data, error, isLoading]);
+  const { products } = useContext(ProductContext);
+  
+  const filteredProducts = useMemo(() => {
+    return products.filter(product => product.discount);
+  }, [ products ])
   
   const breakpoints= {
       480: {
@@ -60,7 +54,7 @@ export default function FlashSales() {
         </SectionHeader>
           
         <SectionSlider breakpoints={breakpoints} prevBtn=".flash-sales.prev-btn" nextBtn=".flash-sales.next-btn">
-          {productDetails.map(product => (
+          {filteredProducts.map(product => (
             <swiper-slide key={product._id} >
               <ProductContainer productDetails={product}/>
             </swiper-slide>

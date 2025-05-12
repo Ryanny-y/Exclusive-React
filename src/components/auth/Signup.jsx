@@ -2,10 +2,12 @@ import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
 import { ProductContext } from '../../context/ProductContext';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Signup() {
 
   const navigate = useNavigate();
+  const { uri } = useContext(AuthContext);
   const { setShowPopUp } = useContext(ProductContext);
   useScrollToTop();
 
@@ -21,7 +23,7 @@ export default function Signup() {
     };
     
     try {
-      const response = await fetch('https://exclusive-api.onrender.com/register', {
+      const response = await fetch(`${uri}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -67,7 +69,7 @@ export default function Signup() {
               required
               placeholder="Name"
               value={name}
-              onChange={(e) => setName(curName => e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <label className="absolute -right-96" htmlFor="username">Username</label>
@@ -78,7 +80,7 @@ export default function Signup() {
               required
               placeholder="Username"
               value={username}
-              onChange={(e) => setUsername(curUsername => e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
 
             <label className="absolute -right-96" htmlFor="password">Password</label>
@@ -89,7 +91,7 @@ export default function Signup() {
               required
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(curPassword => e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <button type="submit" className="w-full bg-primaryRed text-white h-bg-red py-4 font-medium rounded-md">Create An Account</button>

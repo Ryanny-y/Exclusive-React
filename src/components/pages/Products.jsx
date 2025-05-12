@@ -18,12 +18,11 @@ export default function Products() {
     if(filter.includes('category')) {
       const filteredProducts = products.filter(product => 
         product.category.some(cat => 
-          cat.toLowerCase().includes(filter.split('=')[1].toLowerCase())
+          cat.toLowerCase() === filter.split('=')[1].toLowerCase()
         )
       )
       setFilteredProducts(filteredProducts);
     }
-
   }, [filter]);
 
   useEffect(() => {

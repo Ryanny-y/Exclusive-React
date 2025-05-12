@@ -8,7 +8,7 @@ export const CartContext = createContext({});
 export default function CartProvider({children}) {
 
   const navigate = useNavigate();
-  const { userData, isAuthenticated, accessToken } = useContext(AuthContext);
+  const { userData, isAuthenticated, accessToken, uri } = useContext(AuthContext);
   const { setShowPopUp } = useContext(ProductContext);
   const [ cartDetails, setCartDetails ] = useState({});
   const [ cartItems, setCartItems ] = useState([]);
@@ -22,7 +22,7 @@ export default function CartProvider({children}) {
     
       const fetchCartData = async () => {
         try {
-          const response = await fetch(`https://exclusive-api.onrender.com/cart/${userData?.id}`, {
+          const response = await fetch(`${uri}/cart/${userData?.id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export default function CartProvider({children}) {
     }
 
     try {
-      const response = await fetch('https://exclusive-api.onrender.com/cart', {
+      const response = await fetch(`${uri}/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export default function CartProvider({children}) {
   //* HANDLE UPDATE CART QUANTITY
   const updateCartQuantity = async (productId, quantity) => {
     try {
-      const response = await fetch(`https://exclusive-api.onrender.com/cart`, {
+      const response = await fetch(`${uri}/cart`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export default function CartProvider({children}) {
 
   const deleteFromCart = async (productId) => {
     try {
-      const response = await fetch('https://exclusive-api.onrender.com/cart', {
+      const response = await fetch(`${uri}/cart`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ export default function CartProvider({children}) {
 
   const clearCart = async () => {
     try {
-      const response = await fetch('https://exclusive-api.onrender.com/cart/clear', {
+      const response = await fetch(`${uri}/cart/clear`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

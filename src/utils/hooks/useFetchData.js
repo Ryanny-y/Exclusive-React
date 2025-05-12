@@ -8,7 +8,7 @@ const useFetchData = (dataUrl, reqBody = {}) => {
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-
+    
     const fetchData = async (url, options) => {
       setIsLoading(true);
       try {
@@ -17,6 +17,7 @@ const useFetchData = (dataUrl, reqBody = {}) => {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
+        
         if (isMounted) {
           setData(data);
           setError(null);

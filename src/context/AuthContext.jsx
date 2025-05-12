@@ -17,12 +17,14 @@ const AuthProvider = ({children}) => {
   });
   const [ isAuthenticated, setIsAuthenticated ] = useState(false);
   const [ accessToken, setAccessToken ] = useState('');
+  const uri = import.meta.env.VITE_DB_URI;
 
   // 
   const authValue = {
     userData, setUserData,
     isAuthenticated, setIsAuthenticated,
-    accessToken, setAccessToken
+    accessToken, setAccessToken,
+    uri
   }
 
   return (

@@ -3,14 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown, faX } from '@fortawesome/free-solid-svg-icons'
 import { CartContext } from "../../context/CartContext";
 import { getDiscountedPrice } from "../../utils/currency";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function CartProduct({productDetails, handleQuantityChange}) {
 
+  const { uri } = useContext(AuthContext);
   const { deleteFromCart } = useContext(CartContext);
   const [ productQuantity, setProductQuantity ] = useState(String(productDetails.quantity));
   const discountedPrice = getDiscountedPrice(productDetails.price, productDetails.discount);
   const subtotal = discountedPrice * Number(productQuantity);
-
+  
   const inputRef = useRef(null);
   
   const incrementQuantity = () => {
@@ -62,7 +64,7 @@ export default function CartProduct({productDetails, handleQuantityChange}) {
   return (
     <div className="grid grid-cols-4">
       <div className="product-img flex gap-5 flex-wrap relative">
-        <img src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`} alt="Product Image" className="w-10 h-10"/>
+        <img src={`${uri}/image/${productDetails.images[0]}`} alt="Product Image" className="w-10 h-10"/>
         <p className="text-sm">{productDetails.name}</p>
         {/* delete button */}
         <button className="delete-btn flex items-center justify-center p-1.5 h-4 w-4 text-white bg-primaryRed rounded-full absolute -top-1.5 -left-2" style={{'fontSize': '10px'}} onClick={() => deleteFromCart(productDetails._id)}>

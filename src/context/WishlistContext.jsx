@@ -9,7 +9,7 @@ export const WishlistContext = createContext({});
 
 const WishlistProvider = ({ children }) => {
 
-  const { userData, isAuthenticated, accessToken } = useContext(AuthContext);
+  const { userData, isAuthenticated, accessToken, uri } = useContext(AuthContext);
   const { setShowPopUp } = useContext(ProductContext);
   const [ wishlistDetails, setWishlistDetails ] = useState({});
   const [ wishlistItems, setWishlistItems ] = useState([]);
@@ -24,7 +24,7 @@ const WishlistProvider = ({ children }) => {
 
       const fetchWishlistData = async () => {
         try {
-          const response = await fetch(`https://exclusive-api.onrender.com/wishlist/${userData.id}`, {
+          const response = await fetch(`${uri}/wishlist/${userData.id}`, {
             method: 'GET',
             headers: {
               'Content-type': 'application/json',
@@ -69,7 +69,7 @@ const WishlistProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch('https://exclusive-api.onrender.com/wishlist', {
+      const response = await fetch(`${uri}/wishlist`  , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,8 +88,9 @@ const WishlistProvider = ({ children }) => {
       };
       
       const data = await response.json();
+      
       setWishlistChange(prev => !prev);
-      setShowPopUp(`Added To Wishlist`)
+      setShowPopUp(data.message)
     } catch (error) {
       setShowPopUp(`Something Went Wrong: ${error.message}`);
     }
@@ -98,7 +99,7 @@ const WishlistProvider = ({ children }) => {
   //* DELETE FROM WISHLIST
   const removeFromWishlist = async (productId) => {
     try {
-      const response = await fetch('https://exclusive-api.onrender.com/wishlist', {
+      const response = await fetch(`${uri}/wishlist`  , {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

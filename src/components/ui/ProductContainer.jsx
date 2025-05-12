@@ -3,7 +3,8 @@ import ViewProductBtn from "./buttons/ViewProductBtn";
 import AddToCartBtn from "./buttons/AddToCartBtn.jsx";
 import DeleteBtn from "./buttons/DeleteBtn.jsx";
 import { getDiscountedPrice } from "../../utils/currency.js";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 export default function ProductContainer({
   productDetails,
@@ -11,10 +12,9 @@ export default function ProductContainer({
   isJfy = false,
   isDetailed = false,
 }) {
-  const ratingImgSrc = `${isDetailed ? `../` : ""}images/ratings/rating-${
-    productDetails.ratings.stars * 10
-  }.png`;
+  const ratingImgSrc = `/Exclusive-React/images/ratings/rating-${productDetails.ratings.stars * 10}.png`;
 
+  const { uri } = useContext(AuthContext);
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ export default function ProductContainer({
         {!productDetails.discount ||
           (productDetails.discount > 0 && (
             <p className="bg-primaryRed text-white font-semibold absolute top-2 left-3 py-1 px-3 rounded-md text-xs">
-              -{productDetails.discount * 100}%
+              -{productDetails.discount}%
             </p>
           ))}
         {isWishlist && (
@@ -44,7 +44,7 @@ export default function ProductContainer({
         )}
 
         <img
-          src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`}
+          src={`${uri}/image/${productDetails.images[0]}`}
           alt="product image"
           style={{
             width: "100%",

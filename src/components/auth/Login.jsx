@@ -7,12 +7,11 @@ import { ProductContext } from "../../context/ProductContext";
 export default function Login() {
 
   // auth context
-  const { setUserData, setIsAuthenticated, setAccessToken } = useContext(AuthContext);
+  const { setUserData, setIsAuthenticated, setAccessToken, uri } = useContext(AuthContext);
 
   useScrollToTop();
 
   const navigate = useNavigate();
-  const loginUrl = 'https://exclusive-api.onrender.com/auth';
   const { setShowPopUp } = useContext(ProductContext)
 
   const [ username, setUsername ] = useState('');
@@ -28,7 +27,7 @@ export default function Login() {
 
     try {
       // fetch data
-      const response = await fetch(loginUrl, {
+      const response = await fetch(`${uri}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

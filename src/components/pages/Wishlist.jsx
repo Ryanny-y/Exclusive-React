@@ -1,7 +1,7 @@
 import WishlistContainer from "../layouts/WishlistContainer";
 import useRedirect from '../../utils/hooks/useRedirect';
 import useScrollToTop from '../../utils/hooks/useScrollToTop'
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo } from 'react';
 import { WishlistContext } from '../../context/WishlistContext';
 import { ProductContext } from '../../context/ProductContext'
 
@@ -12,17 +12,14 @@ export default function Wishlist() {
   // WISHLIST PRODUCTS
   const { wishlistItems } = useContext(WishlistContext);
   const { products } = useContext(ProductContext);
-  const [ wishlistProducts, setWishlistProducts ] = useState([]);
+  // const [ wishlistProducts, setWishlistProducts ] = useState([]);
 
-  //* FIND THE MATCHING PRODUCT AND ASSIGN IN TO PRODUCT DETAILS
-  useEffect(() => {
-    const filteredProduct = wishlistItems.map(item => {
-      const matchingProduct = products.find(product => product._id === item.productId);
-      return matchingProduct;
-    })
-    
-    setWishlistProducts(filteredProduct);
-  }, [wishlistItems])
+  const wishlistProducts = useMemo(() => {
+    return wishlistItems.map(item => {
+          const matchingProduct = products.find(product => product._id === item.productId);
+          return matchingProduct;
+        })
+  }, [wishlistItems, products])
 
   // JUST FOR YOU PRODUCTS
   const [ jfyProducts, setJfyProducts ] = useState([]);

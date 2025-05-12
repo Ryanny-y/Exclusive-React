@@ -1,11 +1,12 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import useFetchData from "../utils/hooks/useFetchData";
+import { AuthContext } from "./AuthContext";
 
 export const ProductContext = createContext({});
 
 const ProductProvider = ({ children }) => {
 
-  const productsUrl = 'https://exclusive-api.onrender.com/products';
+  const { uri } = useContext(AuthContext);
 
   const [ products, setProducts ] = useState([]);
   const [ searchProduct, setSearchProduct ] = useState('');
@@ -13,7 +14,7 @@ const ProductProvider = ({ children }) => {
   
   const [ showPopUp, setShowPopUp ] = useState('');
   
-  const { data, error, isLoading } = useFetchData(productsUrl);
+  const { data, error, isLoading } = useFetchData(`${uri}/products`);
   useEffect(() => {
     if(data.length && !error && !isLoading) {
       setProducts(data);
