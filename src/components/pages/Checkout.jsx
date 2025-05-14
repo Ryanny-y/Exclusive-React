@@ -13,7 +13,7 @@ export default function Checkout() {
   useRedirect();
 
   const { productDetails, subtotal, shippingFee, total } = useFindMatchingProduct();
-  const { userData, accessToken } = useContext(AuthContext);
+  const { userData, accessToken, uri } = useContext(AuthContext);
   const { clearCart } = useContext(CartContext);
   const { setShowPopUp } = useContext(ProductContext);
 
@@ -45,7 +45,7 @@ export default function Checkout() {
       const orderItems = productDetails.map(product => {
         return { productId: product.productId, quantity: product.quantity, subtotal: (getDiscountedPrice(product.price, product.discount) * product.quantity)};
       })
-      const response = await fetch('https://exclusive-api.onrender.com/orders', {
+      const response = await fetch(`${uri}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ export default function Checkout() {
             ? <div className="product-container flex flex-col gap-8 w-full">
               {productDetails.map(product => (
                 <div key={product._id} className='flex items-center justify-start gap-6 font-medium'>
-                  <img src={`https://exclusive-api.onrender.com/image/${product.images[0]}`} alt="Product img" className='h-10 w-10' />
+                  <img src={`${uri}/image/${product.images[0]}`} alt="Product img" className='h-10 w-10' />
                   <p>{product.name}</p>
                   <p className='ml-auto'>${(getDiscountedPrice(product.price, product.discount)) * product.quantity}</p>
                 </div>
