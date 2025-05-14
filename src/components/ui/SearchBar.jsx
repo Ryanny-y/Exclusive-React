@@ -30,7 +30,7 @@ export default function SearchBar() {
 
   const handleInput = (e) => {
     if(e.key === 'Enter') {
-      navigate('/Exclusive-React/Products');
+      navigate('/Products');
     }
   }
 
@@ -45,7 +45,7 @@ export default function SearchBar() {
           onChange={(e) => setSearchProduct(e.target.value)}
           onKeyDown={(e) => handleInput(e)}
         />
-        <FontAwesomeIcon className="absolute top-1/2 -translate-y-1/2 right-3" icon={faMagnifyingGlass} onClick={() => navigate('/Exclusive-React/Products')}/>
+        <FontAwesomeIcon className="absolute top-1/2 -translate-y-1/2 right-3" icon={faMagnifyingGlass} onClick={() => navigate('/Products')}/>
       </div>
 
       <Link to='wishlist' className="relative">
@@ -66,10 +66,10 @@ export default function SearchBar() {
           <button className="text-base bg-primaryRed text-white w-8 h-8 rounded-full" onClick={() => setShowUserOption(cur => !cur)}><FontAwesomeIcon icon={faUser} /></button>
           <ul className={userOptionClass}>
             <li className="h-text-red">
-              <Link to='/Exclusive-React/account'><FontAwesomeIcon icon={faUser} className="mr-2"/> Manage My Account</Link>
+              <Link to='/account'><FontAwesomeIcon icon={faUser} className="mr-2"/> Manage My Account</Link>
             </li>
             <li className="h-text-red">
-              <Link to='/Exclusive-React/orders'> My Order</Link>
+              <Link to='/orders'> My Order</Link>
             </li>
             <li className="h-text-red">
               <Link> My Cancellations</Link>
@@ -79,7 +79,7 @@ export default function SearchBar() {
             </li>
             <li className="h-text-red">
               {/* Link */}
-              <Link to='/Exclusive-React/logout'>Logout</Link>
+              <Link to='/logout'>Logout</Link>
             </li>
           </ul>
         </div>

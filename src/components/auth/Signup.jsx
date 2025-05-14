@@ -44,7 +44,7 @@ export default function Signup() {
       
       await response.json();
       setShowPopUp('Sign Up Successful')
-      navigate('/Exclusive-React/login')
+      navigate('/login')
     } catch (error) {
       setShowPopUp(error.message);
     }
@@ -104,7 +104,7 @@ export default function Signup() {
 
           <p className="flex items-center justify-center gap-3 text-secondaryGray">
             <span>Already have an account?</span>
-            <Link to='/Exclusive-React/login' className="font-semibold underline underline-offset-4 h-text-red">Log in</Link>
+            <Link to='/login' className="font-semibold underline underline-offset-4 h-text-red">Log in</Link>
           </p>
         </section>
       </div>

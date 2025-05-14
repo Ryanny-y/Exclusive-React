@@ -64,7 +64,7 @@ const WishlistProvider = ({ children }) => {
   //* ADD TO WISHLIST
   const addToWishlist = async (productId) => {
     if(!isAuthenticated) {
-      navigate('/Exclusive-React/login');
+      navigate('/login');
       return;
     }
 

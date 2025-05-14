@@ -30,7 +30,7 @@ export default function BestSelling() {
   return (
     <SectionContainer classname="best-selling">
       <SectionHeader sectionTitle="This Month" sectionHeader="Best Selling Products" >
-        <Link to='/Exclusive-React/products' className="px-8 text-nowrap sm:px-10 md:px-12 py-4 font-medium bg-primaryRed text-white h-bg-red rounded-md self-end">
+        <Link to='/products' className="px-8 text-nowrap sm:px-10 md:px-12 py-4 font-medium bg-primaryRed text-white h-bg-red rounded-md self-end">
           View All
         </Link>  
       </SectionHeader>

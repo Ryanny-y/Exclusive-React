@@ -10,7 +10,7 @@ const useRedirect = () => {
   
   useEffect(() => {
     if(!isAuthenticated) {
-      navigate('/Exclusive-React/login');
+      navigate('/login');
       return;
     }
   }, [ isAuthenticated ])

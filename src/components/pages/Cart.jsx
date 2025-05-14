@@ -42,7 +42,7 @@ export default function Cart() {
           </div>
 
           <div className="cart-btns display flex items-center justify-between text-nowrap flex-wrap gap-2 font-semibold">
-            <Link to='/Exclusive-React/' className="py-4 border border-secondaryGray rounded-sm text-center w-full xs:w-54 hover:text-white hover:bg-primaryRed duration-200">Return To Shop</Link>
+            <Link to='/' className="py-4 border border-secondaryGray rounded-sm text-center w-full xs:w-54 hover:text-white hover:bg-primaryRed duration-200">Return To Shop</Link>
           </div>
         </section>
 
@@ -62,7 +62,7 @@ export default function Cart() {
             <hr className="h-0.5 bg-dark" />
             <p className="flex items-center justify-between"><span>Total:</span> ${total}</p>
 
-            <Link to='/Exclusive-React/checkout' className="self-center bg-primaryRed text-white font-semibold rounded-md py-4 px-12">Proceed To Checkout</Link>
+            <Link to='/checkout' className="self-center bg-primaryRed text-white font-semibold rounded-md py-4 px-12">Proceed To Checkout</Link>
           </div>
         </section>
       </div>

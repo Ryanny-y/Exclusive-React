@@ -31,18 +31,18 @@ export default function Footer() {
 
         <div id="account" className="flex flex-col gap-4 shrink-0 grow md:grow-0">
           <h1 className="font-medium">My Account</h1>
-          <Link to='/Exclusive-React/' className="h-text-red">Account</Link>
+          <Link to='/' className="h-text-red">Account</Link>
           <Link to='login' className="h-text-red">Login / Register</Link>
           <Link to='cart' className="h-text-red">Cart</Link>
           <Link to='wishlist' className="h-text-red">Wishlist</Link>
-          <Link to='/Exclusive-React/products' className="h-text-red">Shop</Link>
+          <Link to='/products' className="h-text-red">Shop</Link>
         </div>
 
         <div id="quick-link" className="flex flex-col gap-4 md:basis-40 grow md:grow-0">
           <h1 className="font-medium">Quick Link</h1>
-          <a href='/Exclusive-React/' className="h-text-red">Privacy Policy</a>
-          <a href='/Exclusive-React/' className="h-text-red">Term Of Use</a>
-          <a href='/Exclusive-React/' className="h-text-red">FAQ</a>
+          <a href='/' className="h-text-red">Privacy Policy</a>
+          <a href='/' className="h-text-red">Term Of Use</a>
+          <a href='/' className="h-text-red">FAQ</a>
           <Link to='contact' className="h-text-red">Contact</Link>
         </div>
 
@@ -55,10 +55,10 @@ export default function Footer() {
             <img src="images/logo/AppStore.png" className="col-start-2 row-start-2 w-60 h-full" alt="App Store" />
           </div>
           <div className="socials flex gap-6">
-            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faFacebookF} /></Link>
-            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faTwitter} /></Link>
-            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faInstagram} /></Link>
-            <Link to='/Exclusive-React/' className="h-text-red"><FontAwesomeIcon icon={faLinkedin} /></Link>
+            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faFacebookF} /></Link>
+            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faTwitter} /></Link>
+            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faInstagram} /></Link>
+            <Link to='/' className="h-text-red"><FontAwesomeIcon icon={faLinkedin} /></Link>
           </div>
         </div>
       </div>

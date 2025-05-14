@@ -61,7 +61,7 @@ export default function FlashSales() {
           ))}
         </SectionSlider>
 
-        <Link to='/Exclusive-React/products' className="bg-primaryRed text-light py-4 px-12 self-center rounded-sm h-bg-red">View All Product</Link>
+        <Link to='/products' className="bg-primaryRed text-light py-4 px-12 self-center rounded-sm h-bg-red">View All Product</Link>
       </SectionContainer>
   )
 

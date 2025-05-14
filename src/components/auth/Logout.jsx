@@ -23,7 +23,7 @@ export default function Logout() {
         setUserData({});
         setAccessToken('');
         setIsAuthenticated(false);
-        navigate('/Exclusive-React/login');
+        navigate('/login');
       } catch (error) {
         setShowPopUp(error.message);
       }

@@ -12,7 +12,7 @@ export default function ProductContainer({
   isJfy = false,
   isDetailed = false,
 }) {
-  const ratingImgSrc = `/Exclusive-React/images/ratings/rating-${productDetails.ratings.stars * 10}.png`;
+  const ratingImgSrc = `/images/ratings/rating-${productDetails.ratings.stars * 10}.png`;
 
   const { uri } = useContext(AuthContext);
   const [hovered, setHovered] = useState(false);

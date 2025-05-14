@@ -61,7 +61,7 @@ export default function CartProvider({children}) {
   const addToCart = async (productId) => {
     // REDIRECT USERS TO LOGIN WHEN THEY ARE NOT AUTHENTICATED
     if(!isAuthenticated) {
-      navigate('/Exclusive-React/login');
+      navigate('/login');
       return;
     }
 

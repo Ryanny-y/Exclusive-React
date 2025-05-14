@@ -51,7 +51,7 @@ export default function Login() {
       setUserData(userData);
       setAccessToken(data.accessToken)
       setIsAuthenticated(true);
-      navigate('/Exclusive-React/')
+      navigate('/')
     } catch (error) {
       setShowPopUp(error.message);
     }
@@ -102,7 +102,7 @@ export default function Login() {
 
           <p className="flex items-center justify-center gap-3 text-secondaryGray">
             <span>Don't have an account?</span>
-            <Link to='/Exclusive-React/signup' className="font-semibold underline underline-offset-4 h-text-red">Sign up</Link>
+            <Link to='/signup' className="font-semibold underline underline-offset-4 h-text-red">Sign up</Link>
           </p>
         </section>
       </div>
