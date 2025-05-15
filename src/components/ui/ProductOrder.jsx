@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { formatCurrency } from '../../utils/currency';
 
 export default function ProductOrder({ orderDetails }) {
-  console.log(orderDetails.order_date);
 
   return (
     <div className="border border-primaryGray rounded-md shadow-lg">

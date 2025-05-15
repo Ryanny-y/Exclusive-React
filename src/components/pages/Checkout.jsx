@@ -45,6 +45,7 @@ export default function Checkout() {
       const orderItems = productDetails.map(product => {
         return { productId: product.productId, quantity: product.quantity, subtotal: (getDiscountedPrice(product.price, product.discount) * product.quantity)};
       })
+      
       const response = await fetch(`${uri}/orders`, {
         method: 'POST',
         headers: {

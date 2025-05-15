@@ -10,14 +10,13 @@ export default function Orders() {
   useRedirect();
   useScrollToTop();
   const [ orderData, setOrderData ] = useState([]);
-  const { userData, isAuthenticated, accessToken } = useContext(AuthContext);
+  const { userData, isAuthenticated, accessToken, uri } = useContext(AuthContext);
 
   useEffect(() => {
     if(isAuthenticated) {
       const fetchOrders = async () => {
-        console.log(userData?.id);
         try {
-          const response = await fetch(`https://exclusive-api.onrender.com/orders/${userData?.id}`, {
+          const response = await fetch(`${uri}/orders/${userData?.id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -28,7 +27,7 @@ export default function Orders() {
           
           if(!response.ok) {
             const errData = await response.json();
-            const errMsg = errData.message || errData.statusText();
+            const errMsg = errData.error || errData.statusText();
             throw new Error(errMsg);    
           }
           const data = await response.json();
@@ -36,7 +35,6 @@ export default function Orders() {
         } catch (error) {
           console.error(error.message);
         }
-
       }
 
       fetchOrders();

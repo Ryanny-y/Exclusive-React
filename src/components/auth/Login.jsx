@@ -41,7 +41,7 @@ export default function Login() {
 
       if(!response.ok) {
         const errData = await response.json();
-        const errMsg = errData.message || errData.statusText;
+        const errMsg = errData.error || errData.statusText;
         throw new Error(errMsg)
       }
 

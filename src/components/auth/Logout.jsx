@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom"; // Use for navigation
 import { ProductContext } from "../../context/ProductContext";
 
 export default function Logout() {
-  const { setUserData, setAccessToken, setIsAuthenticated } = useContext(AuthContext);
+  const { setUserData, setAccessToken, setIsAuthenticated, uri } = useContext(AuthContext);
   const navigate = useNavigate();
   const { setShowPopUp } = useContext(ProductContext)
 
   useEffect(() => {
     const logoutUser = async () => {
       try {
-        const response = await fetch('https://exclusive-api.onrender.com/logout', {
+        const response = await fetch(`${uri}/logout`, {
           method: 'GET',
           credentials: 'include'
         });

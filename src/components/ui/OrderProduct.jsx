@@ -2,18 +2,20 @@ import { useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import dayjs from "dayjs";
 import { CartContext } from "../../context/CartContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function OrderProduct({ details, orderDate }) {
   const { products } = useContext(ProductContext)
   const matchingProduct = products.find(product => details.productId === product._id);
   const { addToCart } = useContext(CartContext);
+  const { uri } = useContext(AuthContext);
 
   
   return (
     <div className="px-10 flex flex-col sm:flex-row items-center w-full gap-10 py-10">
       <div className="h-full w-32">
         <img
-          src={`https://exclusive-api.onrender.com/image/${matchingProduct.images[0]}`}
+          src={`${uri}/image/${matchingProduct.images[0]}`}
           alt=""
           className="h-full w-full"
         />
