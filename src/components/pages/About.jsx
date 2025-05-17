@@ -13,7 +13,7 @@ export default function About() {
   useScrollToTop();
 
   return (
-    <main className="about pt-20 pb-28">
+    <main className="about pt-48 pb-20 sm:py-20 lg:py-16">
       <div className="container mx-auto flex flex-col gap-16">
         <SmallHeader headers={headers}/>
 

@@ -3,14 +3,19 @@ import SmallHeader from "../ui/SmallHeader";
 import { AuthContext } from "../../context/AuthContext";
 import useRedirect from "../../utils/hooks/useRedirect";
 import useScrollToTop from "../../utils/hooks/useScrollToTop";
+import { ProductContext } from "../../context/ProductContext";
+import { useNavigate } from 'react-router-dom';
 
 export default function Account() {
   useRedirect();
   useScrollToTop();
 
-  const { userData } = useContext(AuthContext);
-  console.log(userData);
+  const { userData, setUserData, uri, accessToken } = useContext(AuthContext);
+  const { setShowPopUp } = useContext(ProductContext);
+  const navigate = useNavigate();
 
+  console.log(userData);
+  
   const [showFields, setShowFields] = useState({
     myProfile: true,
     addressBook: false,
@@ -20,10 +25,10 @@ export default function Account() {
   });
 
   const [dataFields, setDataFields] = useState({
-    firstName: userData.firstName,
-    lastName: "",
-    email: "",
-    address: "",
+    first_name: userData?.data?.first_name || "",
+    last_name: userData?.data?.last_name || "",
+    email: userData?.data?.email || "",
+    address: userData?.data?.address || "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -36,15 +41,44 @@ export default function Account() {
     }));
   };
 
+  const handleUpdateChanges = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${uri}/users/${userData._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(dataFields),
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        const errMsg = errData.error || errData.statusText();
+        throw new Error(errMsg);
+      }
+
+      const data = await response.json();
+      setUserData(data);
+      navigate(0);
+      setShowPopUp('Account Update Complete!');
+    } catch (error) {
+      setShowPopUp(`Fetch error: ${error.message}`);
+    }
+  };
+
   return (
     <main
       className="not-found pt-20 pb-28"
       data-aos="fade-up"
       data-aos-delay="100"
     >
-      <div className="container mx-auto flex flex-col gap-20">
+      <div className="container mx-auto flex flex-col pt-10 gap-10 md:pt-0 md:gap-20">
         <SmallHeader headers={["Home", "My Account"]} />
-        <section id="my-account" className="flex gap-32">
+        <section id="my-account" className="flex flex-col md:flex-row gap-5 md:gap-32">
           <aside id="account-sidenav" className="flex flex-col gap-5">
             <div id="manage-account">
               <h1 className="font-semibold mb-3">Manage My Account</h1>
@@ -70,14 +104,14 @@ export default function Account() {
 
           <main id="account-details" className="border border-black grow">
             {showFields.myProfile && (
-              <div className="py-10 px-20">
+              <div className="p-5 md:py-10 md:px-20">
                 <h1 className="text-primaryRed text-xl font-light mb-5">
                   Edit Your Profile
                 </h1>
 
-                <form className="flex flex-col gap-6">
+                <form onSubmit={handleUpdateChanges} className="flex flex-col gap-6">
                   {/* FULL NAME */}
-                  <div className="full-name flex gap-14">
+                  <div className="full-name flex flex-col md:flex-row gap-3 md:gap-14">
                     <label
                       htmlFor="first-name"
                       className="flex flex-col gap-2 grow"
@@ -85,9 +119,9 @@ export default function Account() {
                       <span className="text-sm">First Name</span>
                       <input
                         type="text"
-                        value={dataFields.firstName}
+                        value={dataFields.first_name}
                         onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
+                          handleInputChange("first_name", e.target.value)
                         }
                         id="last-name"
                         className="bg-lightGray px-5 py-3 rounded-md outline-none"
@@ -101,9 +135,9 @@ export default function Account() {
                       <span className="text-sm">Last Name</span>
                       <input
                         type="text"
-                        value={dataFields.lastName}
+                        value={dataFields.last_name}
                         onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
+                          handleInputChange("last_name", e.target.value)
                         }
                         id="last-name"
                         className="bg-lightGray px-5 py-3 rounded-md outline-none"
@@ -113,7 +147,7 @@ export default function Account() {
                   </div>
 
                   {/* EMAIL AND ADDRESS */}
-                  <div className="email-address flex gap-14">
+                  <div className="email-address flex flex-col md:flex-row gap-3 md:gap-14">
                     <label htmlFor="email" className="flex flex-col gap-2 grow">
                       <span className="text-sm">Email</span>
                       <input
@@ -190,9 +224,19 @@ export default function Account() {
                     </div>
                   </div>
 
-                  <div className="changes-buttons flex items-center ml-auto">
-                    <button type="button" className="px-12 py-4 rounded-md text-p-red">Cancel</button>
-                    <button type="submit" className="px-12 py-4 bg-primaryRed text-white rounded-md h-bg-red">Save Changes</button>
+                  <div className="changes-buttons flex flex-col-reverse md:flex-row gap-3 md:gap-14 md:items-center md:ml-auto">
+                    <button
+                      type="button"
+                      className="px-12 py-2 md:py-4 rounded-md text-p-red"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-12 py-2 md:py-4 bg-primaryRed text-white rounded-md h-bg-red"
+                    >
+                      Save Changes
+                    </button>
                   </div>
                 </form>
               </div>

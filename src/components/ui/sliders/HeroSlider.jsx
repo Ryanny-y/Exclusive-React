@@ -25,7 +25,7 @@ export default function HeroSlider() {
             <div className="flex justify-between p-10 relative">
               <aside className="flex flex-col gap-5 z-10">
                 <h1 className='text-lg font-light flex items-center gap-4'><FontAwesomeIcon icon={faApple} className='text-5xl'/> iPhone 14 Series</h1>
-                <h1 className='text-6xl font-semibold'>Up to 10% <br/> off Voucher</h1>
+                <h1 className='text-4xl md:text-6xl font-semibold'>Up to 10% <br/> off Voucher</h1>
                 <Link to="/products" className='underline underline-offset-8 flex items-center gap-2'>Shop Now <FontAwesomeIcon icon={faArrowRight} /></Link>
               </aside>
 

@@ -23,7 +23,7 @@ export default function Cart() {
 
   const headers = ['Home', 'Cart'];
   return (
-    <main className="not-found pt-20 pb-28" data-aos="fade-up" data-aos-delay="100">
+    <main className="not-found pt-48 pb-20 sm:py-20 lg:py-16" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex flex-col gap-20">
         <SmallHeader headers={headers} />
 

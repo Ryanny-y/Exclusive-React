@@ -81,7 +81,7 @@ export default function Checkout() {
   }
 
   return (
-    <main className="checkout pt-20 pb-28">
+    <main className="checkout pt-48 pb-20 sm:py-20 lg:py-16">
       <div className="container mx-auto flex flex-col gap-20">
         <SmallHeader headers={headers}/>
 

@@ -47,9 +47,8 @@ export default function Wishlist() {
 
   return (
     <main className="wishlist" data-aos="fade-up" data-aos-delay="100">
-      <div className="container mx-auto py-20 flex flex-col gap-20">
+      <div className="container mx-auto pt-48 pb-20 sm:py-20 lg:py-16 flex flex-col gap-20">
         <WishlistContainer header='Wishlist' productList={wishlistProducts}/>
-
         <WishlistContainer header='Just For You' productList={jfyProducts} isJfy={true}/>
       </div>
     </main>

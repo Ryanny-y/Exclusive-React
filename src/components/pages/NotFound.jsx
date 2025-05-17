@@ -6,7 +6,7 @@ export default function NotFound() {
   const headers = ['Home', '404 Error']
 
   return (
-    <main className="not-found pt-20 pb-28">
+    <main className="not-found pt-48 pb-20 sm:py-20 lg:py-16">
       <div className="container mx-auto flex flex-col gap-28">
         <SmallHeader headers={headers}/>
 

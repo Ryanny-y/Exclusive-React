@@ -42,7 +42,7 @@ export default function Orders() {
   }, [userData, isAuthenticated, accessToken])
   
   return (
-    <main className="contact py-20 lg:py-16" data-aos="fade-up" data-aos-delay="100">
+    <main className="contact pt-48 pb-20 sm:py-20 lg:py-16" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex flex-col gap-20">
         <SmallHeader headers={['Home', 'Orders']}></SmallHeader>
 

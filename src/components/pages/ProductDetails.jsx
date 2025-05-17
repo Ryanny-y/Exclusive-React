@@ -85,7 +85,7 @@ export default function ProductDetails() {
 
   return (
     <main
-      className="product-details pt-20 pb-28"
+      className="product-details pt-48 pb-20 sm:py-20 lg:py-16"
       data-aos="fade-up"
       data-aos-delay="100"
     >
