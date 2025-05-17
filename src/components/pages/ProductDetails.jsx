@@ -15,6 +15,7 @@ import useScrollToTop from "../../utils/hooks/useScrollToTop";
 import { WishlistContext } from "../../context/WishlistContext";
 import SectionSlider from "../ui/sliders/SectionSlider";
 import ProductContainer from "../ui/ProductContainer";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function ProductDetails() {
   useScrollToTop();
@@ -26,6 +27,7 @@ export default function ProductDetails() {
   const [productDetails, setProductDetails] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { uri } = useContext(AuthContext);
 
   //* FIND THE MATCHING PRODUCT AND STORE IN A VARIABLE
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function ProductDetails() {
           <section className="flex flex-col md:flex-row justify-between gap-20">
             <div className="product-img basis-1/2 shrink-0 bg-secondaryLight flex items-center justify-center p-10">
               <img
-                src={`https://exclusive-api.onrender.com/image/${productDetails.images[0]}`}
+                src={`${uri}/image/${productDetails.images[0]}`}
                 alt="Product Img"
                 className="h-80"
               />
