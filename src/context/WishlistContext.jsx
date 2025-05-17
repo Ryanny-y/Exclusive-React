@@ -24,7 +24,7 @@ const WishlistProvider = ({ children }) => {
 
       const fetchWishlistData = async () => {
         try {
-          const response = await fetch(`${uri}/wishlist/${userData.id}`, {
+          const response = await fetch(`${uri}/wishlist/${userData._id}`, {
             method: 'GET',
             headers: {
               'Content-type': 'application/json',
@@ -59,7 +59,7 @@ const WishlistProvider = ({ children }) => {
       }
 
     }
-  }, [isAuthenticated, userData?.id, accessToken, wishlistChange]);
+  }, [isAuthenticated, userData?._id, accessToken, wishlistChange]);
 
   //* ADD TO WISHLIST
   const addToWishlist = async (productId) => {
@@ -76,7 +76,7 @@ const WishlistProvider = ({ children }) => {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData?.id,
+          userId: userData?._id,
           productId
         })
       })
@@ -106,7 +106,7 @@ const WishlistProvider = ({ children }) => {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData?.id,
+          userId: userData?._id,
           productId
         })
       })

@@ -22,7 +22,7 @@ export default function CartProvider({children}) {
     
       const fetchCartData = async () => {
         try {
-          const response = await fetch(`${uri}/cart/${userData?.id}`, {
+          const response = await fetch(`${uri}/cart/${userData?._id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default function CartProvider({children}) {
         controller.abort();
       };
     }
-  }, [isAuthenticated, userData?.id, accessToken, cartChanged])
+  }, [isAuthenticated, userData?._id, accessToken, cartChanged])
 
   //* HANDLE ADD TO CART FUNCTION
   const addToCart = async (productId) => {
@@ -73,7 +73,7 @@ export default function CartProvider({children}) {
           'Authorization' : `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData?.id,
+          userId: userData?._id,
           productId
         }),
         credentials: 'include'
@@ -105,7 +105,7 @@ export default function CartProvider({children}) {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData?.id,
+          userId: userData?._id,
           productId,
           quantity
         }),

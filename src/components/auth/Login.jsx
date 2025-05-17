@@ -58,11 +58,11 @@ export default function Login() {
   }
 
   return (
-    <main className="login relative my-16" data-aos="fade-up" data-aos-delay="100">
+    <main className="login relative my-16 pt-48 sm:pt-0" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex justify-center sm:justify-end items-center" style={{height: '781px'}}>
         <section id="form" className="w-96 flex flex-col gap-4 bg-white rounded-md px-5 py-24">
           <form
-            className="flex flex-col gap-6 w-full relative overflow-hidden"
+            className="flex flex-col gap-5 w-full relative overflow-hidden"
             onSubmit={handleLogin}
           >
             <h1 className="font-semibold tracking-wider text-3xl">Login To Exclusive</h1>
@@ -94,13 +94,13 @@ export default function Login() {
               }}
             />
             
-            <div className="btns flex justify-between text-nowrap gap-20">
+            <div className="btns flex-col sm:flex-row flex justify-between items-center text-nowrap gap-3 sm:gap-20">
               <button type="submit" className=" bg-primaryRed text-white h-bg-red font-medium rounded-md w-full py-4">Log in</button>
-              <button type="button" className=" text-primaryRed hover:text-black duration-200 w-full py-4">Forgot Password? </button>
+              <button type="button" className=" text-primaryRed hover:text-black duration-200 w-full">Forgot Password? </button>
             </div>
           </form>
 
-          <p className="flex items-center justify-center gap-3 text-secondaryGray">
+          <p className="flex flex-col sm:flex-row items-center justify-center gap-3 text-secondaryGray">
             <span>Don't have an account?</span>
             <Link to='/signup' className="font-semibold underline underline-offset-4 h-text-red">Sign up</Link>
           </p>

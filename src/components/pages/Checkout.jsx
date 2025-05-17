@@ -53,7 +53,7 @@ export default function Checkout() {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData?.id,
+          userId: userData?._id,
           order_items: orderItems,
           subtotal,
           shipping_fee: shippingFee,

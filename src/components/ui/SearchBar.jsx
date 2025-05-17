@@ -57,7 +57,7 @@ export default function SearchBar() {
         />
       </div>
 
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-5 items-center ml-auto">
         <Link to="wishlist" className="relative">
           <FontAwesomeIcon icon={faHeart} className="text-xl h-text-red" />
           {isAuthenticated && wishlistLength > 0 && (
@@ -79,7 +79,7 @@ export default function SearchBar() {
         </Link>
 
         {isAuthenticated && (
-          <div className="relative">
+          <div className="relative z-50">
             <button
               className="text-base bg-primaryRed text-white py-0.5 px-2 rounded-full"
               onClick={() => setShowUserOption((cur) => !cur)}

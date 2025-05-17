@@ -51,7 +51,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="signup relative my-16" data-aos="fade-up" data-aos-delay="100">
+    <main className="signup relative my-16 pt-48 sm:pt-0" data-aos="fade-up" data-aos-delay="100">
       <div className="container mx-auto flex justify-center sm:justify-end items-center" style={{height: '781px'}}>
         <section id="form" className="w-96 flex flex-col gap-4 bg-white rounded-md px-5 py-24">
           <form
@@ -97,12 +97,12 @@ export default function Signup() {
             <button type="submit" className="w-full bg-primaryRed text-white h-bg-red py-4 font-medium rounded-md">Create An Account</button>
           </form>
 
-          <button className="border border-secondaryGray py-4 rounded-md w-full font-semibold h-text-red flex items-center justify-center gap-3">
+          <button className="border border-secondaryGray py-4 px-5 rounded-md w-full font-semibold h-text-red flex items-center justify-center gap-3">
             <img src="images/logo/Icon-Google.png" alt="Google icon" className="h-5 w-5"/> 
-            <span>Sign up with Google</span>
+            <span className='text-sm'>Sign up with Google</span>
           </button>
 
-          <p className="flex items-center justify-center gap-3 text-secondaryGray">
+          <p className="flex flex-col sm:flex-row items-center justify-center gap-3 text-secondaryGray">
             <span>Already have an account?</span>
             <Link to='/login' className="font-semibold underline underline-offset-4 h-text-red">Log in</Link>
           </p>

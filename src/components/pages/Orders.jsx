@@ -16,7 +16,7 @@ export default function Orders() {
     if(isAuthenticated) {
       const fetchOrders = async () => {
         try {
-          const response = await fetch(`${uri}/orders/${userData?.id}`, {
+          const response = await fetch(`${uri}/orders/${userData?._id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

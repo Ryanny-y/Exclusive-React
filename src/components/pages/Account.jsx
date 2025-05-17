@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SmallHeader from "../ui/SmallHeader";
 import { AuthContext } from "../../context/AuthContext";
 import useRedirect from "../../utils/hooks/useRedirect";
 import useScrollToTop from "../../utils/hooks/useScrollToTop";
 import { ProductContext } from "../../context/ProductContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Account() {
   useRedirect();
@@ -14,8 +14,6 @@ export default function Account() {
   const { setShowPopUp } = useContext(ProductContext);
   const navigate = useNavigate();
 
-  console.log(userData);
-  
   const [showFields, setShowFields] = useState({
     myProfile: true,
     addressBook: false,
@@ -25,10 +23,10 @@ export default function Account() {
   });
 
   const [dataFields, setDataFields] = useState({
-    first_name: userData?.data?.first_name || "",
-    last_name: userData?.data?.last_name || "",
-    email: userData?.data?.email || "",
-    address: userData?.data?.address || "",
+    first_name: userData?.first_name || "",
+    last_name: userData?.last_name || "",
+    email: userData?.email || "",
+    address: userData?.address || "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -44,8 +42,13 @@ export default function Account() {
   const handleUpdateChanges = async (e) => {
     e.preventDefault();
 
+    if (dataFields.newPassword !== dataFields.confirmPassword) {
+      setShowPopUp("New Password and Confirm Password do not match!");
+      return;
+    }
+
     try {
-      const response = await fetch(`${uri}/users/${userData._id}`, {
+      const response = await fetch(`${uri}/user/${userData?._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -63,8 +66,10 @@ export default function Account() {
 
       const data = await response.json();
       setUserData(data);
-      navigate(0);
-      setShowPopUp('Account Update Complete!');
+      setShowPopUp("Account Update Complete! Redirecting to Login");
+      setTimeout(() => {
+        navigate(0);
+      }, 3000);
     } catch (error) {
       setShowPopUp(`Fetch error: ${error.message}`);
     }
@@ -78,7 +83,10 @@ export default function Account() {
     >
       <div className="container mx-auto flex flex-col pt-10 gap-10 md:pt-0 md:gap-20">
         <SmallHeader headers={["Home", "My Account"]} />
-        <section id="my-account" className="flex flex-col md:flex-row gap-5 md:gap-32">
+        <section
+          id="my-account"
+          className="flex flex-col md:flex-row gap-5 md:gap-24 lg:gap-32"
+        >
           <aside id="account-sidenav" className="flex flex-col gap-5">
             <div id="manage-account">
               <h1 className="font-semibold mb-3">Manage My Account</h1>
@@ -102,16 +110,19 @@ export default function Account() {
             </div>
           </aside>
 
-          <main id="account-details" className="border border-black grow">
+          <main id="account-details" className="border border-black flex-1">
             {showFields.myProfile && (
-              <div className="p-5 md:py-10 md:px-20">
+              <div className="w-full p-5 md:py-10 md:px-16 lg:px-20">
                 <h1 className="text-primaryRed text-xl font-light mb-5">
                   Edit Your Profile
                 </h1>
 
-                <form onSubmit={handleUpdateChanges} className="flex flex-col gap-6">
+                <form
+                  onSubmit={handleUpdateChanges}
+                  className="flex flex-col gap-6"
+                >
                   {/* FULL NAME */}
-                  <div className="full-name flex flex-col md:flex-row gap-3 md:gap-14">
+                  <div className="full-name flex flex-col md:flex-row gap-3 flex-wrap">
                     <label
                       htmlFor="first-name"
                       className="flex flex-col gap-2 grow"
@@ -123,7 +134,7 @@ export default function Account() {
                         onChange={(e) =>
                           handleInputChange("first_name", e.target.value)
                         }
-                        id="last-name"
+                        id="first-name"
                         className="bg-lightGray px-5 py-3 rounded-md outline-none"
                         placeholder="Ex: Ryanny"
                       />
@@ -147,7 +158,7 @@ export default function Account() {
                   </div>
 
                   {/* EMAIL AND ADDRESS */}
-                  <div className="email-address flex flex-col md:flex-row gap-3 md:gap-14">
+                  <div className="email-address flex flex-col md:flex-row gap-3 flex-wrap">
                     <label htmlFor="email" className="flex flex-col gap-2 grow">
                       <span className="text-sm">Email</span>
                       <input
