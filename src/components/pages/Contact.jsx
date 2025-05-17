@@ -4,23 +4,66 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import useScrollToTop from '../../utils/hooks/useScrollToTop';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { ProductContext } from '../../context/ProductContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Contact() {
   useScrollToTop();
 
+  const { userData, accessToken, uri } = useContext(AuthContext); 
+  const { setShowPopUp } = useContext(ProductContext);
   const [ name, setName ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ phone, setPhone ] = useState('');
   const [ message, setMessage ] = useState('');
-
+  const navigate = useNavigate();
   const headers = ['Home', 'Contact']
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setName('')
-    setEmail('')
-    setPhone('')
-    setMessage('')
+
+    if(!userData?._id || !accessToken){
+      console.log(userData);
+      navigate('/login');
+      return;
+    }
+
+    if(!name || !email || !message) {
+      setShowPopUp('Name, Email, and Message are required!');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${uri}/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          user_id: userData?._id,
+          name,
+          email,
+          phone,
+          message
+        }),
+        credentials: 'include'
+      })
+
+      if(!response.ok) {
+        const errData = await response.json();
+        const errMsg = errData.error || errData.statusText;
+        throw new Error(errMsg)
+      }
+      
+      const data = await response.json();
+      console.log(data);
+      setShowPopUp(data.message);
+    } catch (error) {
+      setShowPopUp(error.message);
+    }
   }
 
   return (
@@ -64,7 +107,6 @@ export default function Contact() {
               />
               <input 
                 type='tel'
-                required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className='outline-none h-10 flex-grow p-2 rounded-sm bg-secondaryLight' 

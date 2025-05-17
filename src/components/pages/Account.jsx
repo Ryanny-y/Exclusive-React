@@ -66,10 +66,7 @@ export default function Account() {
 
       const data = await response.json();
       setUserData(data);
-      setShowPopUp("Account Update Complete! Redirecting to Login");
-      setTimeout(() => {
-        navigate(0);
-      }, 3000);
+      setShowPopUp("Account Update Complete!");
     } catch (error) {
       setShowPopUp(`Fetch error: ${error.message}`);
     }
@@ -236,12 +233,6 @@ export default function Account() {
                   </div>
 
                   <div className="changes-buttons flex flex-col-reverse md:flex-row gap-3 md:gap-14 md:items-center md:ml-auto">
-                    <button
-                      type="button"
-                      className="px-12 py-2 md:py-4 rounded-md text-p-red"
-                    >
-                      Cancel
-                    </button>
                     <button
                       type="submit"
                       className="px-12 py-2 md:py-4 bg-primaryRed text-white rounded-md h-bg-red"
