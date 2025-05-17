@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { formatCurrency } from '../../utils/currency';
 
 export default function ProductOrder({ orderDetails }) {
-
+  
   return (
     <div className="border border-primaryGray rounded-md shadow-lg">
       <header className="flex sm:text-nowrap flex-wrap justify-between gap-5 place-items-center bg-lightGray px-5 py-4">
@@ -13,7 +13,7 @@ export default function ProductOrder({ orderDetails }) {
         </p>
         <p className="flex sm:items-center gap-2">
           <span className="font-semibold text-nowrap">Date Ordered:</span>
-          <span className="break-all">{dayjs(orderDetails._order_date).format('MMMM DD, YYYY')}</span>
+          <span className="break-all">{dayjs(orderDetails.order_date).format('MMMM DD, YYYY')}</span>
         </p>
         <p className="flex sm:items-center gap-2">
           <span className="font-semibold text-nowrap">Total:</span>

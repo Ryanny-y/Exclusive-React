@@ -136,7 +136,7 @@ export default function CartProvider({children}) {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData.id,
+          userId: userData?._id,
           productId
         }),
         credentials: 'include'
@@ -166,7 +166,7 @@ export default function CartProvider({children}) {
           'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          userId: userData.id
+          userId: userData?._id
         }),
         credentials: 'include'
       })
